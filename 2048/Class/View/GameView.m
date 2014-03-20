@@ -11,15 +11,19 @@
 #import "GameBlock.h"
 #import "UIView+Animation.h"
 #import "Global.h"
+#import "UIView+Controller.h"
+#import "UMSocial.h"
 @implementation GameView
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
+        
         _gameBoxs = [[NSMutableArray alloc] init];
         _gameBlocks = [[NSMutableArray alloc] init];
-        
+        _baseView = [[UIView alloc] initWithFrame:frame];
+        [self addSubview:_baseView];
         _btnTurnLeft = [UIButton buttonWithType:UIButtonTypeCustom];
         [_btnTurnLeft setImage:[UIImage imageNamed:@"left.png"] forState:UIControlStateNormal];
         [_btnTurnLeft addTarget:self action:@selector(btnDidSelect:) forControlEvents:UIControlEventTouchUpInside];
@@ -68,11 +72,68 @@
         [_btnTurnUp setTitle:@"^" forState:UIControlStateNormal];
         [_btnTurnRight setTitle:@">" forState:UIControlStateNormal];
         [_btnTurnDown setTitle:@"V" forState:UIControlStateNormal];
+        
         // Initialization code
         _currentGameSize = 4;
+        UIButton *btnShare = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        [btnShare setTitle:@"share" forState:UIControlStateNormal];
+        btnShare.frame = CGRectMake(frame.size.width - 100, 20, 50, 50);
+        [btnShare addTarget:self
+                     action:@selector(Share)
+           forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:btnShare];
+        
         
     }
     return self;
+}
+
+- (UIImage *)pb_takeSnapshot {
+    UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, [UIScreen mainScreen].scale);
+    
+    [_baseView drawViewHierarchyInRect:self.bounds afterScreenUpdates:YES];
+    
+    // old style [self.layer renderInContext:UIGraphicsGetCurrentContext()];
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
+
+-(UIImage *)convertViewToImage
+{
+    UIGraphicsBeginImageContext(self.bounds.size);
+    [_baseView drawViewHierarchyInRect:self.bounds afterScreenUpdates:YES];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+//
+//- (UIImage *)gameView
+//{
+//    UIGraphicsBeginImageContext(CGSizeMake(320,480));
+//    CGContextRef context = UIGraphicsGetCurrentContext();
+//    [_baseView.layer drawInContext:context];
+//    UIImage *screenShot = UIGraphicsGetImageFromCurrentImageContext();
+//    UIGraphicsEndImageContext();;
+//    return screenShot;
+//}
+
+- (void)Share
+{
+    NSLog(@"share");
+    UIImage *img = [self convertViewToImage];
+    NSLog(@"%@",img);
+    [UMSocialData defaultData].extConfig.wechatSessionData.title = @"q23";
+    [UMSocialData defaultData].extConfig.wxMessageType = UMSocialWXMessageTypeApp;
+
+    [UMSocialSnsService presentSnsIconSheetView:self.viewController
+                                         appKey:AppKey_um
+                                      shareText:@"112112211212212121"
+                                     shareImage:img
+                                shareToSnsNames:[NSArray arrayWithObjects:UMShareToWechatTimeline,UMShareToWechatSession,nil]
+                                       delegate:nil];
 }
 
 - (void)Start
@@ -130,7 +191,7 @@
                                                              ([UIScreen mainScreen].bounds.size.width - 2 * spacing))];
     bgView.backgroundColor = [UIColor colorWithRed:173/255. green:157/255. blue:143/255. alpha:1];
     bgView.layer.cornerRadius = Q(5);
-    [self addSubview:bgView];
+    [_baseView addSubview:bgView];
     
     
     for (int i = 0; i < size; i++) {
@@ -142,7 +203,7 @@
             GameBox *bgCell = [[GameBox alloc]initWithFrame:r];
             bgCell.x = j;
             bgCell.y = i;
-            [self addSubview:bgCell];
+            [_baseView addSubview:bgCell];
             [_gameBoxs addObject:bgCell];
         }
     }
@@ -306,7 +367,7 @@
         block.moveEnd = ^(GameBlock *b){
             
         };
-        [self addSubview:block];
+        [_baseView addSubview:block];
         [_gameBlocks addObject:block];
     }
 }
@@ -383,32 +444,35 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-//    CGPoint touchLocation = [[touches anyObject] locationInView:self];
-//    GameDirection direction = GameDirectionTurnLeft;
-//    
-//    int absX = abs(touchLocation.x - touchLocation.x);
-//    int absY = abs(touchLocation.y - touchLocation.y);
-//    if (touchLocation.x - _lastTouchLocation.x > 130 &&
-//        absY < 50)
-//    {
-//        direction = GameDirectionTurnRight;
-//    }
-//    if (touchLocation.x - _lastTouchLocation.x < -130 &&
-//        absY < 50)
-//    {
-//        direction = GameDirectionTurnLeft;
-//    }
-//    if (touchLocation.y - _lastTouchLocation.y > 130 &&
-//        absX < 50)
-//    {
-//        direction = GameDirectionTurnDown;
-//    }
-//    if (touchLocation.y - _lastTouchLocation.y < -130 &&
-//        absX < 50)
-//    {
-//        direction = GameDirectionTurnUp;
-//    }
-//    [self play:direction];
-//    NSLog(@"touch end");
+    CGPoint touchLocation = [[touches anyObject] locationInView:self];
+    GameDirection direction = -1;
+    
+    int absX = abs(touchLocation.x - touchLocation.x);
+    int absY = abs(touchLocation.y - touchLocation.y);
+    if (touchLocation.x - _lastTouchLocation.x > 130 &&
+        absY < 50)
+    {
+        direction = GameDirectionTurnRight;
+    }
+    if (touchLocation.x - _lastTouchLocation.x < -130 &&
+        absY < 50)
+    {
+        direction = GameDirectionTurnLeft;
+    }
+    if (touchLocation.y - _lastTouchLocation.y > 130 &&
+        absX < 50)
+    {
+        direction = GameDirectionTurnDown;
+    }
+    if (touchLocation.y - _lastTouchLocation.y < -130 &&
+        absX < 50)
+    {
+        direction = GameDirectionTurnUp;
+    }
+    if ((int)direction != -1)
+    {
+        [self play:direction];
+    }
+    NSLog(@"touch end");
 }
 @end

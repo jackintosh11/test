@@ -24,6 +24,7 @@ typedef enum GameDirection
     CGPoint _lastTouchLocation;
     NSMutableArray *_gameBoxs;
     NSMutableArray *_gameBlocks;
+    UIView *_baseView;
 }
 @property (nonatomic, assign) int currentGameSize;
 - (void)Start;

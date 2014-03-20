@@ -7,7 +7,8 @@
 //
 
 #import "MainView.h"
-
+#import "UMSocial.h"
+#import "UIView+Controller.h"
 @implementation MainView
 
 - (id)initWithFrame:(CGRect)frame

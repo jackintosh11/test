@@ -7,11 +7,13 @@
 //
 
 #import "AppDelegate.h"
-
+#import "UMSocial.h"
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [UMSocialData setAppKey:AppKey_um];
+    [UMSocialConfig setWXAppId:AppKey_um url:nil];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     _mainViewController = [[MainViewController alloc] init];
     self.window.rootViewController = _mainViewController;

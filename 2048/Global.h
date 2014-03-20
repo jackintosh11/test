@@ -7,3 +7,4 @@
 //
 #define isPad (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 #define Q(__A__) (isPad?__A__*2:__A__)
+#define AppKey_um @"532ae51856240b2cd8016426"
