@@ -43,18 +43,14 @@
 
 - (void)pop
 {
-    [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionCurveEaseIn
+    [UIView animateWithDuration:0.1
                      animations:^(){
                          self.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.2, 1.2);
                      }
                      completion:^(BOOL finished) {
-                         NSLog(@"finish%d,",finished);
-                         if (finished)
-                         {
                          [UIView animateWithDuration:.1 animations:^{
                              self.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1);
                          }];
-                         }
                      }];
 }
 
