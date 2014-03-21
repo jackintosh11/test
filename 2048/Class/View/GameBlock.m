@@ -33,8 +33,7 @@
 - (void)setNumber:(int)number
 {
     _number = number;
-    _label.text = [NSString stringWithFormat:@"%d",_number];
-    int level = 0;
+        int level = 0;
     while (number > 0) {
         number/=2;
         level++;
@@ -71,7 +70,11 @@
         [self changeBgColor:[UIColor colorWithRed:232/255. green:195/255. blue:75/255. alpha:1]];
     }
 }
+- (void)refresh
+{
+    _label.text = [NSString stringWithFormat:@"%d",_number];
 
+}
 - (void)setBox:(GameBox *)box
 {
     _box.currentBlock = nil;

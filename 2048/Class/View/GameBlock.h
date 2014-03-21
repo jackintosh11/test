@@ -21,5 +21,5 @@
 @property (nonatomic, strong) void(^moveEnd)(GameBlock *);
 @property (nonatomic, readonly) BOOL isMoving;
 - (void)disappear;
-
+- (void)refresh;
 @end
