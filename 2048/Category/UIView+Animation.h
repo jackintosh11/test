@@ -10,6 +10,8 @@
 
 @interface UIView(Animation)
 
+- (void)moveToView:(UIView *)view;
+
 - (void)moveToCenter:(CGPoint)center;
 
 - (void)moveToRect:(CGRect)rect;
