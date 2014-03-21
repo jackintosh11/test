@@ -26,8 +26,8 @@
 //    float v = 400;
 
     [UIView beginAnimations:@"move" context:nil];
-    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-    [UIView setAnimationDuration:.3];
+    [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+    [UIView setAnimationDuration:.2];
     [UIView setAnimationDelegate:self];
     [UIView setAnimationDidStopSelector:@selector(moveDidEnd)];
     self.center = center;
@@ -43,18 +43,19 @@
 
 - (void)pop
 {
-//    self.layer.contentsScale = 1.2;
-//    return;
-//    CGRect originRect = self.frame;
-//    [UIView beginAnimations:nil context:nil];
-//    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-//    [UIView setAnimationDuration:0.2];
-//    
-//    self.frame = CGRectMake(self.frame.origin.x - self.frame.size.width * 0.1,
-//                            self.frame.origin.y - self.frame.size.height * 0.1,
-//                            self.frame.size.width*1.2,
-//                            self.frame.size.height*1.2);
-//    [UIView commitAnimations];
+    [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionCurveEaseIn
+                     animations:^(){
+                         self.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.2, 1.2);
+                     }
+                     completion:^(BOOL finished) {
+                         NSLog(@"finish%d,",finished);
+                         if (finished)
+                         {
+                         [UIView animateWithDuration:.1 animations:^{
+                             self.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1);
+                         }];
+                         }
+                     }];
 }
 
 - (void)show
@@ -80,7 +81,7 @@
 
 - (void)moveToCenter:(CGPoint)center withRebound:(CGPoint)offset delay:(float)delay
 {
-    [UIView animateWithDuration:.25 delay:delay options:UIViewAnimationOptionCurveEaseOut
+    [UIView animateWithDuration:.25 delay:delay options:UIViewAnimationOptionCurveEaseIn
                      animations:^(){
                          self.center = CGPointMake(center.x+offset.x, center.y+offset.y);
                      }

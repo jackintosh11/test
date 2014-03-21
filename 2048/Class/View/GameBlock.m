@@ -8,6 +8,7 @@
 
 #import "GameBlock.h"
 #import "UIView+Animation.h"
+#import "UILabel+Change.h"
 @implementation GameBlock
 
 - (id)initWithFrame:(CGRect)frame
@@ -72,7 +73,12 @@
 }
 - (void)refresh
 {
-    _label.text = [NSString stringWithFormat:@"%d",_number];
+    if (_label.text.length && [_label.text intValue] != _number)
+    {
+        NSLog(@"%@:%d",self,_number);
+        [self pop];
+    }
+    [_label changeText:[NSString stringWithFormat:@"%d",_number]];
 
 }
 - (void)setBox:(GameBox *)box

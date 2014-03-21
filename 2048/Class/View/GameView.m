@@ -364,7 +364,8 @@
         [box creatBlock:block];
         [block show];
         block.center = box.center;
-        block.number = (arc4random()%2 + 1) * 2;
+        
+        block.number = arc4random()%6 < 5?2:4;
         [block refresh];
         block.moveEnd = ^(GameBlock *b){
             
@@ -384,7 +385,6 @@
         block.moveEnd = ^(GameBlock *b){
             [box.currentBlock refresh];
         };
-        [box.currentBlock pop];
         box.currentBlock.number = result;
         box.currentBlock.hitable = false;
     }
