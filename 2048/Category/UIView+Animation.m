@@ -9,7 +9,11 @@
 #import "UIView+Animation.h"
 
 @implementation UIView(Animation)
-
+- (void)moveToView:(UIView *)view
+{
+    [self.superview insertSubview:self belowSubview:view];
+    [self moveToCenter:view.center];
+}
 - (void)moveToCenter:(CGPoint)center
 {
 //    CGRect displayFrame = [[self.layer presentationLayer] frame];
@@ -20,6 +24,7 @@
     
 //    float s = sqrtf(powf(center.x - self.center.x, 2) + powf(center.y - self.center.y, 2));
 //    float v = 400;
+
     [UIView beginAnimations:@"move" context:nil];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
     [UIView setAnimationDuration:.3];

@@ -102,15 +102,20 @@
         _moveEnd(self);
     }
 }
-
 - (void)moveToCenter:(CGPoint)center
+{
+    _isMoving = YES;
+    [super moveToCenter:center];
+}
+
+- (void)moveToView:(UIView *)view
 {
     if (_isMoving)
     {
         NSLog(@"!!!!!");
     }
 //    NSLog(@"moving %d,%d",self.x,self.y);
-    [super moveToCenter:center];
+    [super moveToView:view];
     _isMoving = YES;
 }
 

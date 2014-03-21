@@ -379,7 +379,7 @@
     int result = block.number + box.currentBlock.number;
     if (box.currentBlock)
     {
-        [block moveToCenter:box.currentBlock.center];
+        [block moveToView:box.currentBlock];
         [block disappear];
         block.moveEnd = ^(GameBlock *b){
             [box.currentBlock refresh];
@@ -455,25 +455,21 @@
     CGPoint touchLocation = [[touches anyObject] locationInView:self];
     GameDirection direction = -1;
     
-    int absX = abs(touchLocation.x - touchLocation.x);
-    int absY = abs(touchLocation.y - touchLocation.y);
-    if (touchLocation.x - _lastTouchLocation.x > 130 &&
-        absY < 50)
+    int absX = abs(touchLocation.x - _lastTouchLocation.x);
+    int absY = abs(touchLocation.y - _lastTouchLocation.y);
+    if ((touchLocation.x - _lastTouchLocation.x)/absY > 2)
     {
         direction = GameDirectionTurnRight;
     }
-    if (touchLocation.x - _lastTouchLocation.x < -130 &&
-        absY < 50)
+    else if ((_lastTouchLocation.x - touchLocation.x)/absY > 2)
     {
         direction = GameDirectionTurnLeft;
     }
-    if (touchLocation.y - _lastTouchLocation.y > 130 &&
-        absX < 50)
+    else if ((touchLocation.y - _lastTouchLocation.y)/absX > 2)
     {
         direction = GameDirectionTurnDown;
     }
-    if (touchLocation.y - _lastTouchLocation.y < -130 &&
-        absX < 50)
+    else if ((_lastTouchLocation.y - touchLocation.y)/absX > 2)
     {
         direction = GameDirectionTurnUp;
     }
