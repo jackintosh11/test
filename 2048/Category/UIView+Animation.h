@@ -21,4 +21,7 @@
 - (void)show;
 
 - (void)changeBgColor:(UIColor *)color;
+
+- (void)moveToCenter:(CGPoint)center withRebound:(CGPoint)offset delay:(float)delay;
+
 @end

@@ -8,6 +8,7 @@
 
 #import "MainView.h"
 #import "UMSocial.h"
+#import "UIView+Animation.h"
 #import "UIView+Controller.h"
 #import "GameBox.h"
 #import "GameBlock.h"
@@ -25,7 +26,7 @@
         [_btnStart addTarget:self action:@selector(btnStartSelected) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_btnStart];
         _btnStart.frame = CGRectMake(0, 0, Q(150), Q(38));
-        _btnStart.center = CGPointMake(frame.size.width/2 ,frame.size.height * 3.0/4.5);
+        _btnStart.center = CGPointMake(frame.size.width/2 ,frame.size.height * 3.0/4);
         _btnStart.titleLabel.font = [UIFont fontWithName:Font size:16.0];
         [_btnStart setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_btnStart setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
@@ -37,6 +38,7 @@
         [_btnSetting addTarget:self action:@selector(btnSettingSelected) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_btnSetting];
         _btnSetting.frame = CGRectMake(0, 0, Q(75), Q(38));
+        _btnSetting.center = CGPointMake(frame.size.width/2 ,frame.size.height-_btnSetting.frame.size.height/2.0 - Q(2));
         _btnSetting.titleLabel.font = [UIFont fontWithName:Font size:14.0];
         [_btnSetting setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_btnSetting setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
@@ -61,10 +63,22 @@
         [_btnHelp setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_btnHelp setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
         
-        _btnSetting.center = CGPointMake(frame.size.width/2 ,frame.size.height-_btnSetting.frame.size.height/2.0 - Q(2));
-        _btnAbout.center = CGPointMake(self.frame.size.width/2 ,_btnSetting.frame.origin.y + Q(48));
-        _btnHelp.center = CGPointMake(self.frame.size.width/2 ,_btnAbout.frame.origin.y + Q(48));
         _isMenuShow = NO;
+        
+        _lblBestScore = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, Q(200), Q(32))];
+        [_lblBestScore setFont:[UIFont fontWithName:Font size:14]];
+        [_lblBestScore setText:@"Your best: 1024"];
+        [_lblBestScore setTextAlignment:NSTextAlignmentCenter];
+        [self addSubview:_lblBestScore];
+        
+        [self calculateLayersCenter];
+        
+//        _lblMaxCount = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, Q(200), Q(32))];
+//        [_lblMaxCount setCenter:CGPointMake(frame.size.width/2.0, _lblBestScore.center.y - Q(32))];
+//        [_lblMaxCount setFont:[UIFont fontWithName:Font size:14]];
+//        [_lblMaxCount setText:@"Max count: 1024"];
+//        [_lblMaxCount setTextAlignment:NSTextAlignmentCenter];
+//        [self addSubview:_lblMaxCount];
         
 //        UIButton *btnAdd = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 //        [btnAdd setTitle:@"+" forState:UIControlStateNormal];
@@ -105,6 +119,14 @@
 
 - (void)btnStartSelected
 {
+    [UIView beginAnimations:@"MainViewExit" context:nil];
+    [UIView setAnimationDelegate:self];
+    [UIView setAnimationDidStopSelector:@selector(exitDidFinished)];
+    [UIView commitAnimations];
+}
+
+- (void)exitDidFinished
+{
     if (self.startGame)
     {
         self.startGame(_level);
@@ -113,27 +135,35 @@
 
 - (void)btnSettingSelected
 {
+    float centerx = self.frame.size.width/2;
     if (_isMenuShow) {
         _isMenuShow = NO;
         [_btnSetting setTitle:@"Menu" forState:UIControlStateNormal];
         
-        [UIView beginAnimations:@"SettingHidden" context:nil];
-        [_btnStart setCenter:CGPointMake(self.frame.size.width/2 ,self.frame.size.height * 3.0/4.5)];
-        _btnSetting.center = CGPointMake(self.frame.size.width/2 ,self.frame.size.height-_btnSetting.frame.size.height/2.0 - Q(2));
-        _btnAbout.center = CGPointMake(self.frame.size.width/2 ,_btnSetting.frame.origin.y + Q(48));
-        _btnHelp.center = CGPointMake(self.frame.size.width/2 ,_btnAbout.frame.origin.y + Q(48));
-        [UIView commitAnimations];
+        float starty = self.frame.size.height * 3.0/4;
+        float settingy = self.frame.size.height-_btnSetting.frame.size.height/2.0 - Q(2);
+        
+        [_lblBestScore moveToCenter:CGPointMake(centerx, starty - Q(48)) withRebound:ReboundOffsetYP delay:0];
+        [_btnStart moveToCenter:CGPointMake(centerx ,starty) withRebound:ReboundOffsetYP delay:0.05];
+        [_btnSetting moveToCenter:CGPointMake(centerx ,settingy) withRebound:ReboundOffsetYP delay:0.1];
+        
+        [_btnAbout moveToCenter:CGPointMake(centerx ,settingy + Q(32)) withRebound:ReboundOffsetYP delay:0.15];
+        [_btnHelp moveToCenter:CGPointMake(centerx ,settingy + Q(64)) withRebound:ReboundOffsetYP delay:0.2];
+        
     }
     else {
         _isMenuShow = YES;
         [_btnSetting setTitle:@"Hidden" forState:UIControlStateNormal];
         
-        [UIView beginAnimations:@"SettingShow" context:nil];
-        [_btnStart setCenter:CGPointMake(self.frame.size.width/2 ,self.frame.size.height * 3.0/5)];
-        _btnSetting.center = CGPointMake(self.frame.size.width/2 ,self.frame.size.height-_btnSetting.frame.size.height/2.0 - Q(72));
-        _btnAbout.center = CGPointMake(self.frame.size.width/2 ,_btnSetting.frame.origin.y + Q(48));
-        _btnHelp.center = CGPointMake(self.frame.size.width/2 ,_btnAbout.frame.origin.y + Q(48));
-        [UIView commitAnimations];
+        float starty = self.frame.size.height * 3.0/4.5;
+        float settingy = self.frame.size.height-_btnSetting.frame.size.height/2.0 - Q(72);
+        
+        [_lblBestScore moveToCenter:CGPointMake(self.frame.size.width/2.0, starty- Q(48)) withRebound:ReboundOffsetYN delay:0.2];
+        [_btnStart moveToCenter:CGPointMake(centerx ,starty) withRebound:ReboundOffsetYN delay:0.15];
+        [_btnSetting moveToCenter:CGPointMake(centerx ,settingy) withRebound:ReboundOffsetYN delay:0.1];
+    
+        [_btnAbout moveToCenter:CGPointMake(self.frame.size.width/2 ,settingy + Q(32)) withRebound:ReboundOffsetYN delay:0.05];
+        [_btnHelp moveToCenter:CGPointMake(self.frame.size.width/2 ,settingy + Q(64)) withRebound:ReboundOffsetYN delay:0];
     }
 }
 
@@ -143,5 +173,13 @@
     _lblLevel.text = [NSString stringWithFormat:@"%d",_level];
 }
 
+- (void)calculateLayersCenter
+{
+    
+    _btnAbout.center = CGPointMake(self.frame.size.width/2 ,_btnSetting.frame.origin.y + Q(48));
+    _btnHelp.center = CGPointMake(self.frame.size.width/2 ,_btnAbout.frame.origin.y + Q(48));
+    [_lblBestScore setCenter:CGPointMake(self.frame.size.width/2.0, _btnStart.center.y - Q(48))];
+    
+}
 
 @end

@@ -13,6 +13,9 @@
     UIButton *_btnStart;
     UILabel *_lblLevel;
     
+    UILabel *_lblBestScore;
+    UILabel *_lblMaxCount;
+    
     UIButton *_btnSetting;
     UIButton *_btnAbout;
     UIButton *_btnHelp;
@@ -20,5 +23,7 @@
 }
 @property (nonatomic, assign) int level;
 @property (nonatomic, strong)void(^startGame)(int level);
+
+- (void)calculateLayersCenter;
 
 @end

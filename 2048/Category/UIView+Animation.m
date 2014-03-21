@@ -73,4 +73,18 @@
     [UIView commitAnimations];
 }
 
+- (void)moveToCenter:(CGPoint)center withRebound:(CGPoint)offset delay:(float)delay
+{
+    [UIView animateWithDuration:.25 delay:delay options:UIViewAnimationOptionCurveEaseOut
+                     animations:^(){
+                         self.center = CGPointMake(center.x+offset.x, center.y+offset.y);
+                     }
+                     completion:^(BOOL finished) {
+                         [UIView animateWithDuration:.2 animations:^(){
+                             [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
+                             self.center = center;
+                         }];
+                     }];
+}
+
 @end

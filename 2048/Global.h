@@ -11,3 +11,6 @@
 
 #define BackgroundColor [UIColor colorWithRed:231.0/255.0 green:235.0/255.0 blue:239.0/255.0 alpha:.1]
 #define Font @"Chalkduster"
+
+#define ReboundOffsetYP CGPointMake(0, 8)
+#define ReboundOffsetYN CGPointMake(0, -8)
