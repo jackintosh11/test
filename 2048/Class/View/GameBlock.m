@@ -24,6 +24,7 @@
         _label.textAlignment = NSTextAlignmentCenter;
         [_label setAdjustsFontSizeToFitWidth:YES];
         [self addSubview:_label];
+        self.hitable = YES;
         // Initialization code
     }
     return self;
