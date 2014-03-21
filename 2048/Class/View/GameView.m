@@ -19,6 +19,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        [self setBackgroundColor:BackgroundColor];
         
         _gameBoxs = [[NSMutableArray alloc] init];
         _gameBlocks = [[NSMutableArray alloc] init];

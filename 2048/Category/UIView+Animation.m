@@ -18,11 +18,11 @@
 //                            self.frame.size.width,
 //                            self.frame.size.height);
     
-    float s = sqrtf(powf(center.x - self.center.x, 2) + powf(center.y - self.center.y, 2));
-    float v = 400;
+//    float s = sqrtf(powf(center.x - self.center.x, 2) + powf(center.y - self.center.y, 2));
+//    float v = 400;
     [UIView beginAnimations:@"move" context:nil];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-    [UIView setAnimationDuration:s/v];
+    [UIView setAnimationDuration:.3];
     [UIView setAnimationDelegate:self];
     [UIView setAnimationDidStopSelector:@selector(moveDidEnd)];
     self.center = center;

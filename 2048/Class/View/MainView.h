@@ -10,8 +10,15 @@
 
 @interface MainView : UIView
 {
+    UIButton *_btnStart;
     UILabel *_lblLevel;
+    
+    UIButton *_btnSetting;
+    UIButton *_btnAbout;
+    UIButton *_btnHelp;
+    BOOL _isMenuShow;
 }
 @property (nonatomic, assign) int level;
 @property (nonatomic, strong)void(^startGame)(int level);
+
 @end
