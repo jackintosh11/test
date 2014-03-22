@@ -72,14 +72,11 @@
 
 - (void)btnShareSelected
 {
-    [UMSocialData defaultData].extConfig.wechatSessionData.title = @"q23";
-    [UMSocialData defaultData].extConfig.wxMessageType = UMSocialWXMessageTypeApp;
-    
     [UMSocialSnsService presentSnsIconSheetView:self.viewController
                                          appKey:AppKey_um
-                                      shareText:@"112112211212212121"
+                                      shareText:@"Funny pluzze game!"
                                      shareImage:nil
-                                shareToSnsNames:[NSArray arrayWithObjects:UMShareToWechatTimeline,UMShareToWechatSession,nil]
+                                shareToSnsNames:[NSArray arrayWithObjects:UMShareToFacebook,UMShareToTwitter,UMShareToWechatTimeline,UMShareToSina,UMShareToTencent,UMShareToRenren,UMShareToDouban,nil]
                                        delegate:nil];
 }
 
