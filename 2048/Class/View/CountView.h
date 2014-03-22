@@ -19,7 +19,8 @@
 @property (nonatomic, strong) UILabel *lblTitle;
 @property (nonatomic, strong) UILabel *lblScore;
 @property (nonatomic, strong) UILabel *lblDescription;
-@property (nonatomic, strong)void(^exitBlock)();
+@property (nonatomic, strong) void(^exitBlock)();
+@property (nonatomic, strong) UIImage*(^shareSnap)();
 
 - (void)enter;
 - (void)exit;

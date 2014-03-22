@@ -135,6 +135,7 @@
 -(UIImage *)convertViewToImage
 {
     UIGraphicsBeginImageContext(self.bounds.size);
+    [self drawViewHierarchyInRect:self.bounds afterScreenUpdates:YES];
     [_baseView drawViewHierarchyInRect:self.bounds afterScreenUpdates:YES];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
@@ -186,6 +187,8 @@
 
 - (void)restart
 {
+    self.snap =  [self convertViewToImage];
+    
     for (GameBlock *block in _gameBlocks) {
         [block removeFromSuperview];
     }
@@ -278,6 +281,7 @@
             _gameOver(score, max);
         }
     }];
+    [self restart];
 }
 
 - (void)initBackground:(int)size
@@ -286,7 +290,7 @@
     float cellSize = ([UIScreen mainScreen].bounds.size.width - 2 * padding)/size;
     float offset = Q(3);
     float spacing = Q(16);
-    UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(spacing, 100 - (padding - spacing),
+    UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(spacing, Q(120) - (padding - spacing),
                                                              ([UIScreen mainScreen].bounds.size.width - 2 * spacing),
                                                              ([UIScreen mainScreen].bounds.size.width - 2 * spacing))];
     bgView.backgroundColor = [UIColor colorWithRed:173/255. green:157/255. blue:143/255. alpha:1];
@@ -297,7 +301,7 @@
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
             CGRect r = CGRectMake(Q(20) + j * cellSize + offset,
-                                  100 + i * cellSize + offset,
+                                  Q(120) + i * cellSize + offset,
                                   cellSize - 2 * offset,
                                   cellSize - 2 * offset);
             GameBox *bgCell = [[GameBox alloc]initWithFrame:r];
@@ -643,7 +647,6 @@
 
 - (void)exit:(void (^)(BOOL finished))completion
 {
-    [self restart];
     [UIView animateWithDuration:.3 animations:^{
         [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
         [_baseView setCenter:CGPointMake(-self.frame.size.width/2.0, _baseView.center.y)];

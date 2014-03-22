@@ -62,7 +62,7 @@
                 else {
                     count.lblTitle.text = @"Score";
                     count.lblScore.text = [NSString stringWithFormat:@"%d", score];
-                    count.lblDescription.text = @"Not Good, try Again!";
+                    count.lblDescription.text = @"Try Again!";
                 }
             }
             
@@ -72,6 +72,9 @@
         _countView.exitBlock = ^() {
             this.view = main;
             [main enter];
+        };
+        _countView.shareSnap = ^UIImage* () {
+            return game.snap;
         };
         self.view = _mainView;
         [_mainView enter];

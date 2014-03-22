@@ -74,8 +74,8 @@
 {
     [UMSocialSnsService presentSnsIconSheetView:self.viewController
                                          appKey:AppKey_um
-                                      shareText:@"Funny pluzze game!"
-                                     shareImage:nil
+                                      shareText:@"Check out my score on 2048²! http://goo.gl/NcAFrc"
+                                     shareImage:_shareSnap()
                                 shareToSnsNames:[NSArray arrayWithObjects:UMShareToFacebook,UMShareToTwitter,UMShareToWechatTimeline,UMShareToSina,UMShareToTencent,UMShareToRenren,UMShareToDouban,nil]
                                        delegate:nil];
 }
