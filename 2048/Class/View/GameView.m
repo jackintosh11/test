@@ -160,9 +160,9 @@
 
     [UMSocialSnsService presentSnsIconSheetView:self.viewController
                                          appKey:AppKey_um
-                                      shareText:@"112112211212212121"
+                                      shareText:@"COME ON!"
                                      shareImage:img
-                                shareToSnsNames:[NSArray arrayWithObjects:UMShareToWechatTimeline,UMShareToWechatSession,nil]
+                                shareToSnsNames:[NSArray arrayWithObjects:UMShareToWechatTimeline,UMShareToWechatSession,UMShareToFacebook,UMShareToTwitter,UMShareToSina,UMShareToTencent, nil]
                                        delegate:nil];
 }
 
