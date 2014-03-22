@@ -61,12 +61,18 @@
 
 - (void)btnRestartSelected
 {
-    
+    [UIView animateWithDuration:.3 animations:^{
+        _btnRestart.center = CGPointMake(-_btnRestart.frame.size.width ,_btnRestart.center.y);
+        _btnResume.center = CGPointMake(-_btnRestart.frame.size.width ,_btnResume.center.y);
+        _btnExit.center = CGPointMake(-_btnRestart.frame.size.width ,_btnExit.center.y);
+    } completion:_restartCallback];
 }
 
 - (void)btnExitSelected
 {
-    [self exit:NULL];
+    if (_exitCallback) {
+        _exitCallback(true);
+    }
 }
 
 - (void)enter

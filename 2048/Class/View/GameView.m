@@ -171,8 +171,8 @@
 {
     [self initBackground:_currentGameSize];
     _baseView.center = CGPointMake(self.frame.size.width * 1.5, self.center.y);
-    
     [_btnMenu setCenter:CGPointMake(_btnMenu.center.x, -_btnMenu.frame.size.height/2.0)];
+    
     [_baseView moveToCenter:CGPointMake(self.frame.size.width/2.0, self.center.y)
            withRebound:CGPointMake(-8, 0) delay:0
             completion:^(BOOL finished) {
@@ -196,9 +196,8 @@
     for (UIView *view in [NSArray arrayWithArray:_baseView.subviews]) {
         [view removeFromSuperview];
     }
-    [self Start];
-//    _baseView
     
+    [_popup removeFromSuperview];
 }
 - (void)dealloc
 {
@@ -555,11 +554,21 @@
         _popup = [[PopupMenu alloc] initWithFrame:_baseView.frame];
         
         __weak UIView *base = _baseView;
-        __weak UIView *this = self;
+        __weak GameView *this = self;
         __weak UIView *popup = _popup;
         _popup.resumeCallback = ^(BOOL finished) {
             [popup removeFromSuperview];
             [base moveToCenter:CGPointMake(this.frame.size.width/2.0, this.center.y) withRebound:CGPointMake(8, 0) delay:0];
+        };
+        _popup.exitCallback = ^(BOOL finished) {
+            this.gameOver(0, 0);
+        };
+        _popup.restartCallback = ^(BOOL finished) {
+            [popup removeFromSuperview];
+            [this restart];
+            [base moveToCenter:CGPointMake(this.frame.size.width/2.0, this.center.y) withRebound:CGPointMake(8, 0) delay:0 completion:^(BOOL finished) {
+                [this Start];
+            }];
         };
     }
     
@@ -573,6 +582,7 @@
 
 - (void)exit:(void (^)(BOOL finished))completion
 {
+    [self restart];
     [UIView animateWithDuration:.3 animations:^{
         [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
         [_baseView setCenter:CGPointMake(-self.frame.size.width/2.0, _baseView.center.y)];
