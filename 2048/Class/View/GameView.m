@@ -88,7 +88,8 @@
         
         _btnMenu = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         _btnMenu.frame = CGRectMake(0, 0, frame.size.width, Q(64));
-        [self unhighlightMenu];
+        _btnMenu.backgroundColor = _btnMenu.backgroundColor = [UIColor colorWithRed:247.0/255.0 green:245.0/255.0 blue:240.0/255.0 alpha:1];
+        
         [_btnMenu addTarget:self action:@selector(menuSelected) forControlEvents:UIControlEventTouchUpInside];
         [_btnMenu addTarget:self action:@selector(highlightMenu) forControlEvents:UIControlEventTouchDown];
         [_btnMenu addTarget:self action:@selector(unhighlightMenu) forControlEvents:UIControlEventTouchUpOutside];
@@ -256,7 +257,8 @@
     }
     [self resetBlock];
     
-    if ([self checkGameOver]) {
+    if (!self.isGameOver && [self checkGameOver]) {
+        self.isGameOver = YES;
         [self performSelector:@selector(finishGame) withObject:nil afterDelay:1.5];
     }
 }
@@ -286,6 +288,7 @@
 
 - (void)finishGame
 {
+    self.isGameOver = NO;
     int score = self.score;
     int max = self.maxNumber;
     [self exit:^(BOOL finished) {
@@ -580,19 +583,20 @@
     
     int absX = abs(touchLocation.x - _lastTouchLocation.x);
     int absY = abs(touchLocation.y - _lastTouchLocation.y);
-    if ((touchLocation.x - _lastTouchLocation.x)/absY > 1.5)
+    int ratio = 1.3;
+    if ((touchLocation.x - _lastTouchLocation.x)/absY > ratio)
     {
         direction = GameDirectionTurnRight;
     }
-    else if ((_lastTouchLocation.x - touchLocation.x)/absY > 1.5)
+    else if ((_lastTouchLocation.x - touchLocation.x)/absY > ratio)
     {
         direction = GameDirectionTurnLeft;
     }
-    else if ((touchLocation.y - _lastTouchLocation.y)/absX > 1.5)
+    else if ((touchLocation.y - _lastTouchLocation.y)/absX > ratio)
     {
         direction = GameDirectionTurnDown;
     }
-    else if ((_lastTouchLocation.y - touchLocation.y)/absX > 1.5)
+    else if ((_lastTouchLocation.y - touchLocation.y)/absX > ratio)
     {
         direction = GameDirectionTurnUp;
     }
@@ -610,7 +614,6 @@
 
 - (void)menuSelected
 {
-    [AudioHelper click];
 //    [self exit:^(BOOL finished) {
 //        _gameOver(0, 0);
 //    }];
