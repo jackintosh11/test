@@ -152,8 +152,6 @@
 
 - (void)Share
 {
-    [self restart];
-    return;
     NSLog(@"share");
     UIImage *img = [self convertViewToImage];
     NSLog(@"%@",img);
