@@ -85,22 +85,24 @@
         
         _btnMenu = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         _btnMenu.frame = CGRectMake(0, 0, frame.size.width, Q(64));
-        _btnMenu.backgroundColor = [UIColor colorWithRed:247.0/255.0 green:245.0/255.0 blue:240.0/255.0 alpha:1];
+        [self unhighlightMenu];
         [_btnMenu addTarget:self action:@selector(menuSelected) forControlEvents:UIControlEventTouchUpInside];
+        [_btnMenu addTarget:self action:@selector(highlightMenu) forControlEvents:UIControlEventTouchDown];
+        [_btnMenu addTarget:self action:@selector(unhighlightMenu) forControlEvents:UIControlEventTouchUpOutside];
         [self addSubview:_btnMenu];
 
-        _lblScore = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, Q(40), Q(30))];
-        [_lblScore setCenter:CGPointMake(frame.size.width/2.0 + _lblScore.frame.size.width/2.0, _lblScore.frame.size.height)];
-        [_lblScore setFont:[UIFont fontWithName:Font size:Q(12)]];
-        [_lblScore setText:@"Score"];
-        [_lblScore setTextAlignment:NSTextAlignmentCenter];
-        [_btnMenu addSubview:_lblScore];
-        _lblScoreText = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, Q(100), Q(30))];
-        [_lblScoreText setCenter:CGPointMake(_lblScore.center.x + Q(75), _lblScore.frame.size.height)];
-        [_lblScoreText setFont:[UIFont fontWithName:Font size:Q(18)]];
-        [_lblScoreText setText:@"1024100"];
+        _lblScoreText = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, Q(40), Q(30))];
+        [_lblScoreText setCenter:CGPointMake(frame.size.width/2.0 + _lblScoreText.frame.size.width/2.0, _lblScoreText.frame.size.height)];
+        [_lblScoreText setFont:[UIFont fontWithName:Font size:Q(12)]];
+        [_lblScoreText setText:@"Score"];
         [_lblScoreText setTextAlignment:NSTextAlignmentCenter];
         [_btnMenu addSubview:_lblScoreText];
+        _lblScore = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, Q(100), Q(30))];
+        [_lblScore setCenter:CGPointMake(_lblScoreText.center.x + Q(75), _lblScoreText.frame.size.height)];
+        [_lblScore setFont:[UIFont fontWithName:Font size:Q(18)]];
+        [_lblScore setText:@"0"];
+        [_lblScore setTextAlignment:NSTextAlignmentCenter];
+        [_btnMenu addSubview:_lblScore];
         
         _lblNumberText = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, Q(90), Q(30))];
         [_lblNumberText setCenter:CGPointMake(_lblNumberText.frame.size.width/2.0, _lblNumberText.frame.size.height)];
@@ -111,7 +113,7 @@
         _lblNumber = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, Q(60), Q(30))];
         [_lblNumber setCenter:CGPointMake(_lblNumberText.center.x + Q(65), _lblNumberText.frame.size.height)];
         [_lblNumber setFont:[UIFont fontWithName:Font size:Q(18)]];
-        [_lblNumber setText:@"4096"];
+        [_lblNumber setText:@"0"];
         [_lblNumber setTextAlignment:NSTextAlignmentCenter];
         [_btnMenu addSubview:_lblNumber];
     }
@@ -198,6 +200,9 @@
     }
     
     [_popup removeFromSuperview];
+    
+    self.maxNumber = 0;
+    self.score = 0;
 }
 - (void)dealloc
 {
@@ -235,6 +240,44 @@
         [self CreateNewCell];
     }
     [self resetBlock];
+    
+    if ([self checkGameOver]) {
+        [self performSelector:@selector(finishGame) withObject:nil afterDelay:1.5];
+    }
+}
+
+- (BOOL)checkGameOver
+{
+    for (int i = 0; i < _gameBoxs.count; i++) {
+        GameBox *box = _gameBoxs[i];
+        if (box.currentBlock == nil) {
+            return NO;
+        }
+    }
+    if ([self moveBlocksWithDicrection:GameDirectionTurnDown]) {
+        return NO;
+    }
+    if ([self moveBlocksWithDicrection:GameDirectionTurnRight]) {
+        return NO;
+    }
+    if ([self moveBlocksWithDicrection:GameDirectionTurnUp]) {
+        return NO;
+    }
+    if ([self moveBlocksWithDicrection:GameDirectionTurnLeft]) {
+        return NO;
+    }
+    return YES;
+}
+
+- (void)finishGame
+{
+    int score = self.score;
+    int max = self.maxNumber;
+    [self exit:^(BOOL finished) {
+        if (_gameOver) {
+            _gameOver(score, max);
+        }
+    }];
 }
 
 - (void)initBackground:(int)size
@@ -438,9 +481,14 @@
         [block moveToView:box.currentBlock];
         [block disappear];
         __weak GameBlock* temp = block;
+        __weak GameView* this = self;
         block.moveEnd = ^(GameBlock *b){
             if (box.currentBlock != temp) {
                 [box.currentBlock refresh];
+                this.score += box.currentBlock.number;
+                if (box.currentBlock.number > this.maxNumber) {
+                    this.maxNumber = box.currentBlock.number;
+                }
             }
         };
         box.currentBlock.number = result;
@@ -549,6 +597,7 @@
 //    [self exit:^(BOOL finished) {
 //        _gameOver(0, 0);
 //    }];
+    [self unhighlightMenu];
     
     if (!_popup) {
         _popup = [[PopupMenu alloc] initWithFrame:_baseView.frame];
@@ -562,7 +611,8 @@
         };
         _popup.exitCallback = ^(BOOL finished) {
             [popup removeFromSuperview];
-            this.gameOver(0, 0);
+            this.gameOver(this.score, this.maxNumber);
+            [this restart];
         };
         _popup.restartCallback = ^(BOOL finished) {
             [popup removeFromSuperview];
@@ -581,6 +631,16 @@
     }];
 }
 
+- (void)highlightMenu
+{
+    _btnMenu.backgroundColor = _btnMenu.backgroundColor = [UIColor colorWithRed:207.0/255.0 green:205.0/255.0 blue:200.0/255.0 alpha:1];
+}
+
+- (void)unhighlightMenu
+{
+    _btnMenu.backgroundColor = _btnMenu.backgroundColor = [UIColor colorWithRed:247.0/255.0 green:245.0/255.0 blue:240.0/255.0 alpha:1];
+}
+
 - (void)exit:(void (^)(BOOL finished))completion
 {
     [self restart];
@@ -590,6 +650,22 @@
         [_btnMenu setCenter:CGPointMake(_btnMenu.center.x, -self.frame.size.height/2.0)];
         
     } completion:completion];
+}
+
+- (void)setMaxNumber:(int)maxNumber
+{
+    if (_maxNumber != maxNumber) {
+        _maxNumber = maxNumber;
+        _lblNumber.text = [NSString stringWithFormat:@"%d", _maxNumber];
+    }
+}
+
+- (void)setScore:(int)score
+{
+    if (_score != score) {
+        _score = score;
+        _lblScore.text = [NSString stringWithFormat:@"%d", _score];
+    }
 }
 
 @end

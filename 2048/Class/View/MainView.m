@@ -229,6 +229,9 @@
 
 - (void)enter
 {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    int bestScore = [userDefaults integerForKey:@"bestscore"];
+    [_lblBestScore setText:[NSString stringWithFormat:@"Your best: %d",bestScore]];
     [_logoView setCenter:CGPointMake(_logoView.center.x, -_logoView.frame.size.height)];
     [_btnStart setCenter:CGPointMake(_btnStart.center.x, self.frame.size.height+_btnStart.frame.size.height)];
     [_lblBestScore setCenter:_btnStart.center];

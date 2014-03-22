@@ -36,6 +36,9 @@ typedef enum GameDirection
     
     PopupMenu *_popup;
 }
+
+@property (nonatomic, assign) int maxNumber;
+@property (nonatomic, assign) int score;
 @property (nonatomic, assign) int currentGameSize;
 @property (nonatomic, strong)void(^gameOver)(int score, int max);
 

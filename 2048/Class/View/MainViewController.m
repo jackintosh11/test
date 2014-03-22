@@ -32,6 +32,40 @@
             [game Start];
         };
         _gameView.gameOver = ^(int score, int max) {
+            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+            int bestScore = [userDefaults integerForKey:@"bestscore"];
+            int bestNumber = [userDefaults integerForKey:@"bestNumber"];
+            if (score > bestScore) {
+                [userDefaults setInteger:score forKey:@"bestscore"];
+            }
+            if (max > bestNumber) {
+                [userDefaults setInteger:max forKey:@"bestNumber"];
+            }
+            [userDefaults synchronize];
+            
+            if (score > bestScore) {
+                count.lblTitle.text = @"New Score";
+                count.lblScore.text = [NSString stringWithFormat:@"%d", score];
+                count.lblDescription.text = @"Great job!";
+            }
+            else if (max > bestNumber) {
+                count.lblTitle.text = @"New Max Number";
+                count.lblScore.text = [NSString stringWithFormat:@"%d", max];
+                count.lblDescription.text = @"Great job!";
+            }
+            else {
+                if (max >= 2048) {
+                    count.lblTitle.text = @"Score";
+                    count.lblScore.text = [NSString stringWithFormat:@"%d", score];
+                    count.lblDescription.text = @"Well Done!";
+                }
+                else {
+                    count.lblTitle.text = @"Score";
+                    count.lblScore.text = [NSString stringWithFormat:@"%d", score];
+                    count.lblDescription.text = @"Not Good, try Again!";
+                }
+            }
+            
             this.view = count;
             [count enter];
         };
@@ -40,6 +74,7 @@
             [main enter];
         };
         self.view = _mainView;
+        [_mainView enter];
     }
     return self;
 }
