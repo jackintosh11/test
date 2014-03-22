@@ -10,6 +10,8 @@
 
 @interface MainView : UIView
 {
+    UIView *_logoView;
+    
     UIButton *_btnStart;
     UILabel *_lblLevel;
     
@@ -20,10 +22,11 @@
     UIButton *_btnAbout;
     UIButton *_btnHelp;
     BOOL _isMenuShow;
+    
 }
 @property (nonatomic, assign) int level;
 @property (nonatomic, strong)void(^startGame)(int level);
 
-- (void)calculateLayersCenter;
+- (void)enter;
 
 @end

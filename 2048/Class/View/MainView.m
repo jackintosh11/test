@@ -21,6 +21,12 @@
     if (self) {
         self.backgroundColor = BackgroundColor;
         
+        _logoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, Q(296), Q(110))];
+//        _logoView.backgroundColor = [UIColor whiteColor];
+        _logoView.center = CGPointMake(frame.size.width/2.0, Q(128));
+        [self addSubview:_logoView];
+        [self initLogo];
+        
         _btnStart = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [_btnStart setTitle:@"Play Now" forState:UIControlStateNormal];
         [_btnStart addTarget:self action:@selector(btnStartSelected) forControlEvents:UIControlEventTouchUpInside];
@@ -105,6 +111,37 @@
     return self;
 }
 
+- (void)initLogo
+{
+    float centerx = _logoView.frame.size.width/2.0;
+    float centery = _logoView.frame.size.height/2.0;
+    float size = Q(64.0);
+    
+    GameBlock *block2 = [[GameBlock alloc] initWithFrame:CGRectMake(0,0,size,size)];
+    block2.center = CGPointMake(centerx - Q(108), centery);
+    [block2 setNumberDirectly:2];
+    [block2 refresh];
+    [_logoView addSubview:block2];
+    
+    GameBlock *block0 = [[GameBlock alloc] initWithFrame:CGRectMake(0,0,size,size)];
+    block0.center = CGPointMake(centerx - Q(36), centery);
+    [block0 setNumberDirectly:0];
+    [block0 refresh];
+    [_logoView addSubview:block0];
+    
+    GameBlock *block4 = [[GameBlock alloc] initWithFrame:CGRectMake(0,0,size,size)];
+    block4.center = CGPointMake(centerx + Q(36), centery);
+    [block4 setNumberDirectly:4];
+    [block4 refresh];
+    [_logoView addSubview:block4];
+    
+    GameBlock *block8 = [[GameBlock alloc] initWithFrame:CGRectMake(0,0,size,size)];
+    block8.center = CGPointMake(centerx + Q(108), centery);
+    [block8 setNumberDirectly:8];
+    [block8 refresh];
+    [_logoView addSubview:block8];
+}
+
 - (void)btnCutSelected
 {
     self.level--;
@@ -124,7 +161,8 @@
     [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
     [UIView setAnimationDelegate:self];
     [UIView setAnimationDidStopSelector:@selector(exitDidFinished)];
-    [_btnStart setCenter:CGPointMake(_btnStart.center.x, -_btnStart.frame.size.height)];
+    [_logoView setCenter:CGPointMake(_logoView.center.x, -_logoView.frame.size.height)];
+    [_btnStart setCenter:CGPointMake(_btnStart.center.x, self.frame.size.height+_btnStart.frame.size.height)];
     [_lblBestScore setCenter:_btnStart.center];
     [_btnSetting setCenter:CGPointMake(_btnSetting.center.x, self.frame.size.height+_btnSetting.frame.size.height)];
     [_btnAbout setCenter:_btnSetting.center];
@@ -187,6 +225,23 @@
     _btnHelp.center = CGPointMake(self.frame.size.width/2 ,_btnAbout.frame.origin.y + Q(48));
     [_lblBestScore setCenter:CGPointMake(self.frame.size.width/2.0, _btnStart.center.y - Q(48))];
     
+}
+
+- (void)enter
+{
+    [_logoView setCenter:CGPointMake(_logoView.center.x, -_logoView.frame.size.height)];
+    [_btnStart setCenter:CGPointMake(_btnStart.center.x, self.frame.size.height+_btnStart.frame.size.height)];
+    [_lblBestScore setCenter:_btnStart.center];
+    [_btnSetting setCenter:CGPointMake(_btnSetting.center.x, self.frame.size.height+_btnSetting.frame.size.height)];
+    [_btnAbout setCenter:_btnSetting.center];
+    [_btnHelp setCenter:_btnHelp.center];
+    
+    [_logoView moveToCenter:CGPointMake(self.frame.size.width/2.0, Q(128)) withRebound:CGPointMake(0, 8) delay:.05];
+    [_btnStart moveToCenter:CGPointMake(self.frame.size.width/2 ,self.frame.size.height * 3.0/4) withRebound:CGPointMake(0, -8) delay:.1];
+    [_lblBestScore moveToCenter:CGPointMake(self.frame.size.width/2.0, _btnStart.center.y - Q(48)) withRebound:CGPointMake(0, -8) delay:.05];
+    [_btnSetting moveToCenter:CGPointMake(self.frame.size.width/2 ,self.frame.size.height-_btnSetting.frame.size.height/2.0 - Q(2)) withRebound:CGPointMake(0, -8) delay:.15 completion:^(BOOL finished) {
+        
+    }];
 }
 
 @end

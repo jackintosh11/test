@@ -21,6 +21,7 @@
     if (self) {
         _gameView = [[GameView alloc] initWithFrame:self.view.frame];
         _mainView = [[MainView alloc] initWithFrame:self.view.frame];
+        _countView = [[CountView alloc] initWithFrame:self.view.frame];
         __weak MainViewController *this = self;
         __weak GameView *game = _gameView;
         __weak MainView *main = _mainView;
@@ -32,6 +33,11 @@
         };
         _gameView.gameOver = ^() {
             this.view = count;
+            [count enter];
+        };
+        _countView.exitBlock = ^() {
+            this.view = main;
+            [main enter];
         };
         self.view = _mainView;
     }

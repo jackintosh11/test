@@ -11,8 +11,8 @@
 #import "GameBlock.h"
 #import "UIView+Animation.h"
 #import "Global.h"
-#import "UIView+Controller.h"
-#import "UMSocial.h"
+//#import "UIView+Controller.h"
+
 @implementation GameView
 
 - (id)initWithFrame:(CGRect)frame
@@ -25,40 +25,40 @@
         _gameBlocks = [[NSMutableArray alloc] init];
         _baseView = [[UIView alloc] initWithFrame:frame];
         [self addSubview:_baseView];
-        _btnTurnLeft = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_btnTurnLeft setImage:[UIImage imageNamed:@"left.png"] forState:UIControlStateNormal];
-        [_btnTurnLeft addTarget:self action:@selector(btnDidSelect:) forControlEvents:UIControlEventTouchUpInside];
-        _btnTurnUp = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_btnTurnUp setImage:[UIImage imageNamed:@"up.png"] forState:UIControlStateNormal];
-        [_btnTurnUp addTarget:self action:@selector(btnDidSelect:) forControlEvents:UIControlEventTouchUpInside];
-        _btnTurnRight = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_btnTurnRight setImage:[UIImage imageNamed:@"right.png"] forState:UIControlStateNormal];
-        [_btnTurnRight addTarget:self action:@selector(btnDidSelect:) forControlEvents:UIControlEventTouchUpInside];
-        _btnTurnDown = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_btnTurnDown setImage:[UIImage imageNamed:@"down.png"] forState:UIControlStateNormal];
-        [_btnTurnDown addTarget:self action:@selector(btnDidSelect:) forControlEvents:UIControlEventTouchUpInside];
-        _btnTurnUp.frame =
-        _btnTurnDown.frame =
-        _btnTurnLeft.frame =
-        _btnTurnRight.frame = CGRectMake(0, 0, isPad?60:50, isPad?60:50);
-
-        _btnTurnUp.frame = CGRectMake(frame.size.width/2 - _btnTurnUp.frame.size.width/2,
-                                      frame.size.height - _btnTurnUp.frame.size.height * 3,
-                                      _btnTurnUp.frame.size.width,
-                                      _btnTurnUp.frame.size.height);
-        _btnTurnDown.frame = CGRectMake(frame.size.width/2 - _btnTurnUp.frame.size.width/2,
-                                        frame.size.height - _btnTurnUp.frame.size.height * 1.5,
-                                        _btnTurnUp.frame.size.width,
-                                        _btnTurnUp.frame.size.height);
-        _btnTurnLeft.frame = CGRectMake(frame.size.width/2 - _btnTurnUp.frame.size.width * 2,
-                                        frame.size.height - _btnTurnUp.frame.size.height * 1.5,
-                                        _btnTurnUp.frame.size.width,
-                                        _btnTurnUp.frame.size.height);
-        _btnTurnRight.frame = CGRectMake(frame.size.width/2 + _btnTurnUp.frame.size.width,
-                                         frame.size.height - _btnTurnUp.frame.size.height * 1.5,
-                                         _btnTurnUp.frame.size.width,
-                                         _btnTurnUp.frame.size.height);
-        
+//        _btnTurnLeft = [UIButton buttonWithType:UIButtonTypeCustom];
+//        [_btnTurnLeft setImage:[UIImage imageNamed:@"left.png"] forState:UIControlStateNormal];
+//        [_btnTurnLeft addTarget:self action:@selector(btnDidSelect:) forControlEvents:UIControlEventTouchUpInside];
+//        _btnTurnUp = [UIButton buttonWithType:UIButtonTypeCustom];
+//        [_btnTurnUp setImage:[UIImage imageNamed:@"up.png"] forState:UIControlStateNormal];
+//        [_btnTurnUp addTarget:self action:@selector(btnDidSelect:) forControlEvents:UIControlEventTouchUpInside];
+//        _btnTurnRight = [UIButton buttonWithType:UIButtonTypeCustom];
+//        [_btnTurnRight setImage:[UIImage imageNamed:@"right.png"] forState:UIControlStateNormal];
+//        [_btnTurnRight addTarget:self action:@selector(btnDidSelect:) forControlEvents:UIControlEventTouchUpInside];
+//        _btnTurnDown = [UIButton buttonWithType:UIButtonTypeCustom];
+//        [_btnTurnDown setImage:[UIImage imageNamed:@"down.png"] forState:UIControlStateNormal];
+//        [_btnTurnDown addTarget:self action:@selector(btnDidSelect:) forControlEvents:UIControlEventTouchUpInside];
+//        _btnTurnUp.frame =
+//        _btnTurnDown.frame =
+//        _btnTurnLeft.frame =
+//        _btnTurnRight.frame = CGRectMake(0, 0, isPad?60:50, isPad?60:50);
+//
+//        _btnTurnUp.frame = CGRectMake(frame.size.width/2 - _btnTurnUp.frame.size.width/2,
+//                                      frame.size.height - _btnTurnUp.frame.size.height * 3,
+//                                      _btnTurnUp.frame.size.width,
+//                                      _btnTurnUp.frame.size.height);
+//        _btnTurnDown.frame = CGRectMake(frame.size.width/2 - _btnTurnUp.frame.size.width/2,
+//                                        frame.size.height - _btnTurnUp.frame.size.height * 1.5,
+//                                        _btnTurnUp.frame.size.width,
+//                                        _btnTurnUp.frame.size.height);
+//        _btnTurnLeft.frame = CGRectMake(frame.size.width/2 - _btnTurnUp.frame.size.width * 2,
+//                                        frame.size.height - _btnTurnUp.frame.size.height * 1.5,
+//                                        _btnTurnUp.frame.size.width,
+//                                        _btnTurnUp.frame.size.height);
+//        _btnTurnRight.frame = CGRectMake(frame.size.width/2 + _btnTurnUp.frame.size.width,
+//                                         frame.size.height - _btnTurnUp.frame.size.height * 1.5,
+//                                         _btnTurnUp.frame.size.width,
+//                                         _btnTurnUp.frame.size.height);
+//        
 //        _btnTurnLeft.backgroundColor = [UIColor purpleColor];
 //        _btnTurnUp.backgroundColor = [UIColor purpleColor];
 //        _btnTurnRight.backgroundColor = [UIColor purpleColor];
@@ -69,50 +69,51 @@
 //        [self addSubview:_btnTurnUp];
 //        [self addSubview:_btnTurnRight];
 //        [self addSubview:_btnTurnDown];
-        [_btnTurnLeft setTitle:@"<" forState:UIControlStateNormal];
-        [_btnTurnUp setTitle:@"^" forState:UIControlStateNormal];
-        [_btnTurnRight setTitle:@">" forState:UIControlStateNormal];
-        [_btnTurnDown setTitle:@"V" forState:UIControlStateNormal];
+//        [_btnTurnLeft setTitle:@"<" forState:UIControlStateNormal];
+//        [_btnTurnUp setTitle:@"^" forState:UIControlStateNormal];
+//        [_btnTurnRight setTitle:@">" forState:UIControlStateNormal];
+//        [_btnTurnDown setTitle:@"V" forState:UIControlStateNormal];
         
-        // Initialization code
         _currentGameSize = 4;
-        UIButton *btnShare = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [btnShare setTitle:@"share" forState:UIControlStateNormal];
-        btnShare.frame = CGRectMake(frame.size.width - 100, 20, 50, 50);
-        [btnShare addTarget:self
-                     action:@selector(Share)
-           forControlEvents:UIControlEventTouchUpInside];
+//        UIButton *btnShare = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+//        [btnShare setTitle:@"share" forState:UIControlStateNormal];
+//        btnShare.frame = CGRectMake(frame.size.width - 100, 20, 50, 50);
+//        [btnShare addTarget:self
+//                     action:@selector(Share)
+//           forControlEvents:UIControlEventTouchUpInside];
 //        [self addSubview:btnShare];
         
-        _lblBack = [[UIView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, Q(64))];
-        _lblBack.backgroundColor = [UIColor colorWithRed:247.0/255.0 green:245.0/255.0 blue:240.0/255.0 alpha:1];
-        [self addSubview:_lblBack];
+        _btnMenu = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        _btnMenu.frame = CGRectMake(0, 0, frame.size.width, Q(64));
+        _btnMenu.backgroundColor = [UIColor colorWithRed:247.0/255.0 green:245.0/255.0 blue:240.0/255.0 alpha:1];
+        [_btnMenu addTarget:self action:@selector(menuSelected) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:_btnMenu];
 
         _lblScore = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, Q(40), Q(30))];
         [_lblScore setCenter:CGPointMake(frame.size.width/2.0 + _lblScore.frame.size.width/2.0, _lblScore.frame.size.height)];
         [_lblScore setFont:[UIFont fontWithName:Font size:Q(12)]];
         [_lblScore setText:@"Score"];
         [_lblScore setTextAlignment:NSTextAlignmentCenter];
-        [_lblBack addSubview:_lblScore];
+        [_btnMenu addSubview:_lblScore];
         _lblScoreText = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, Q(100), Q(30))];
         [_lblScoreText setCenter:CGPointMake(_lblScore.center.x + Q(75), _lblScore.frame.size.height)];
         [_lblScoreText setFont:[UIFont fontWithName:Font size:Q(18)]];
         [_lblScoreText setText:@"1024100"];
         [_lblScoreText setTextAlignment:NSTextAlignmentCenter];
-        [_lblBack addSubview:_lblScoreText];
+        [_btnMenu addSubview:_lblScoreText];
         
         _lblNumberText = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, Q(90), Q(30))];
         [_lblNumberText setCenter:CGPointMake(_lblNumberText.frame.size.width/2.0, _lblNumberText.frame.size.height)];
         [_lblNumberText setFont:[UIFont fontWithName:Font size:Q(12)]];
         [_lblNumberText setText:@"Number"];
         [_lblNumberText setTextAlignment:NSTextAlignmentCenter];
-        [_lblBack addSubview:_lblNumberText];
+        [_btnMenu addSubview:_lblNumberText];
         _lblNumber = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, Q(60), Q(30))];
         [_lblNumber setCenter:CGPointMake(_lblNumberText.center.x + Q(65), _lblNumberText.frame.size.height)];
         [_lblNumber setFont:[UIFont fontWithName:Font size:Q(18)]];
         [_lblNumber setText:@"4096"];
         [_lblNumber setTextAlignment:NSTextAlignmentCenter];
-        [_lblBack addSubview:_lblNumber];
+        [_btnMenu addSubview:_lblNumber];
     }
     return self;
 }
@@ -149,34 +150,34 @@
 //    return screenShot;
 //}
 
-- (void)Share
-{
-    NSLog(@"share");
-    UIImage *img = [self convertViewToImage];
-    NSLog(@"%@",img);
-    [UMSocialData defaultData].extConfig.wechatSessionData.title = @"q23";
-    [UMSocialData defaultData].extConfig.wxMessageType = UMSocialWXMessageTypeApp;
-
-    [UMSocialSnsService presentSnsIconSheetView:self.viewController
-                                         appKey:AppKey_um
-                                      shareText:@"112112211212212121"
-                                     shareImage:img
-                                shareToSnsNames:[NSArray arrayWithObjects:UMShareToWechatTimeline,UMShareToWechatSession,nil]
-                                       delegate:nil];
-}
+//- (void)Share
+//{
+//    NSLog(@"share");
+//    UIImage *img = [self convertViewToImage];
+//    NSLog(@"%@",img);
+//    [UMSocialData defaultData].extConfig.wechatSessionData.title = @"q23";
+//    [UMSocialData defaultData].extConfig.wxMessageType = UMSocialWXMessageTypeApp;
+//
+//    [UMSocialSnsService presentSnsIconSheetView:self.viewController
+//                                         appKey:AppKey_um
+//                                      shareText:@"112112211212212121"
+//                                     shareImage:img
+//                                shareToSnsNames:[NSArray arrayWithObjects:UMShareToWechatTimeline,UMShareToWechatSession,nil]
+//                                       delegate:nil];
+//}
 
 - (void)Start
 {
     [self initBackground:_currentGameSize];
     _baseView.center = CGPointMake(self.frame.size.width * 1.5, self.center.y);
     
-    [_lblBack setCenter:CGPointMake(_lblBack.center.x, -_lblBack.frame.size.height/2.0)];
+    [_btnMenu setCenter:CGPointMake(_btnMenu.center.x, -_btnMenu.frame.size.height/2.0)];
     [_baseView moveToCenter:CGPointMake(self.frame.size.width/2.0, self.center.y)
            withRebound:CGPointMake(-8, 0) delay:0
             completion:^(BOOL finished) {
                 [self gameStart];
                 
-                [_lblBack moveToCenter:CGPointMake(_lblBack.center.x, _lblBack.frame.size.height/2.0) withRebound:CGPointMake(0, 8) delay:0];
+                [_btnMenu moveToCenter:CGPointMake(_btnMenu.center.x, _btnMenu.frame.size.height/2.0) withRebound:CGPointMake(0, 8) delay:0];
             }];
 }
 
@@ -186,27 +187,27 @@
     _gameBlocks = nil;
 }
 
-- (void)btnDidSelect:(id)sender
-{
-    GameDirection direction = GameDirectionTurnLeft;
-    if (sender == _btnTurnLeft)
-    {
-        direction = GameDirectionTurnLeft;
-    }
-    else if (sender == _btnTurnRight)
-    {
-        direction = GameDirectionTurnRight;
-    }
-    else if (sender == _btnTurnUp)
-    {
-        direction = GameDirectionTurnUp;
-    }
-    else if (sender == _btnTurnDown)
-    {
-        direction = GameDirectionTurnDown;
-    }
-    [self play:direction];
-}
+//- (void)btnDidSelect:(id)sender
+//{
+//    GameDirection direction = GameDirectionTurnLeft;
+//    if (sender == _btnTurnLeft)
+//    {
+//        direction = GameDirectionTurnLeft;
+//    }
+//    else if (sender == _btnTurnRight)
+//    {
+//        direction = GameDirectionTurnRight;
+//    }
+//    else if (sender == _btnTurnUp)
+//    {
+//        direction = GameDirectionTurnUp;
+//    }
+//    else if (sender == _btnTurnDown)
+//    {
+//        direction = GameDirectionTurnDown;
+//    }
+//    [self play:direction];
+//}
 
 - (void)play:(GameDirection)direction
 {
@@ -519,4 +520,22 @@
     }
     NSLog(@"touch end");
 }
+
+- (void)menuSelected
+{
+    [self exit:^(BOOL finished) {
+        _gameOver();
+    }];
+}
+
+- (void)exit:(void (^)(BOOL finished))completion
+{
+    [UIView animateWithDuration:.3 animations:^{
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
+        [_baseView setCenter:CGPointMake(-self.frame.size.width/2.0, _baseView.center.y)];
+        [_btnMenu setCenter:CGPointMake(_btnMenu.center.x, -self.frame.size.height/2.0)];
+        
+    } completion:completion];
+}
+
 @end

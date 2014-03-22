@@ -17,16 +17,16 @@ typedef enum GameDirection
 
 @interface GameView : UIView
 {
-    UIButton *_btnTurnLeft;
-    UIButton *_btnTurnUp;
-    UIButton *_btnTurnRight;
-    UIButton *_btnTurnDown;
+//    UIButton *_btnTurnLeft;
+//    UIButton *_btnTurnUp;
+//    UIButton *_btnTurnRight;
+//    UIButton *_btnTurnDown;
     CGPoint _lastTouchLocation;
     NSMutableArray *_gameBoxs;
     NSMutableArray *_gameBlocks;
     UIView *_baseView;
     
-    UIView *_lblBack;
+    UIButton *_btnMenu;
     UILabel *_lblScoreText;
     UILabel *_lblScore;
     UILabel *_lblNumberText;

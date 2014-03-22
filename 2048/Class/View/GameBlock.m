@@ -26,6 +26,8 @@
         [_label setAdjustsFontSizeToFitWidth:YES];
         [self addSubview:_label];
         self.hitable = YES;
+        
+        _number = -1;
 
     }
     return self;
@@ -110,7 +112,10 @@
         level++;
     }
     UIColor *color;
-    if (level == 2)
+    if (level == 0) {
+        color = [UIColor colorWithRed:236/255. green:186/255. blue:129/255. alpha:1];
+    }
+    else if (level == 2)
     {
         color = [UIColor colorWithRed:235/255. green:227/255. blue:217/255. alpha:1];
     }
@@ -154,7 +159,10 @@
         color = [UIColor colorWithRed:228/255. green:197/255. blue:80/255. alpha:1];
     }
     
-    if (level > 3) {
+    if (level == 0) {
+        [_label setTextColor:[UIColor whiteColor]];
+    }
+    else if (level > 3) {
         [_label setTextColor:[UIColor whiteColor]];
     }
     else {
