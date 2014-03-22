@@ -26,4 +26,8 @@
 
 - (void)moveToCenter:(CGPoint)center withRebound:(CGPoint)offset delay:(float)delay;
 
+- (void)moveToCenter:(CGPoint)center withRebound:(CGPoint)offset delay:(float)delay completion:(void (^)(BOOL finished))completion;
+
+- (void)bounce:(float)scale delay:(float)delay completion:(void (^)(BOOL finished))completion;
+
 @end

@@ -22,4 +22,7 @@
 @property (nonatomic, readonly) BOOL isMoving;
 - (void)disappear;
 - (void)refresh;
+
+- (void)setNumberDirectly:(int)number;
+
 @end

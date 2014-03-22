@@ -22,11 +22,16 @@
         _gameView = [[GameView alloc] initWithFrame:self.view.frame];
         _mainView = [[MainView alloc] initWithFrame:self.view.frame];
         __weak MainViewController *this = self;
-        __weak GameView *thisGame = _gameView;
+        __weak GameView *game = _gameView;
+        __weak MainView *main = _mainView;
+        __weak CountView *count = _countView;
         _mainView.startGame = ^(int level){
-            thisGame.currentGameSize = level;
-            this.view = thisGame;
-            [thisGame Start];
+            game.currentGameSize = level;
+            this.view = game;
+            [game Start];
+        };
+        _gameView.gameOver = ^() {
+            this.view = count;
         };
         self.view = _mainView;
     }

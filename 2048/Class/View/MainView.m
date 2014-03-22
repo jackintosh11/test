@@ -27,7 +27,7 @@
         [self addSubview:_btnStart];
         _btnStart.frame = CGRectMake(0, 0, Q(150), Q(38));
         _btnStart.center = CGPointMake(frame.size.width/2 ,frame.size.height * 3.0/4);
-        _btnStart.titleLabel.font = [UIFont fontWithName:Font size:16.0];
+        _btnStart.titleLabel.font = [UIFont fontWithName:Font size:Q(16)];
         [_btnStart setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_btnStart setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
         [_btnStart setBackgroundColor:[UIColor colorWithRed:.2578 green:.6953 blue:.6758 alpha:1]];
@@ -39,7 +39,7 @@
         [self addSubview:_btnSetting];
         _btnSetting.frame = CGRectMake(0, 0, Q(75), Q(38));
         _btnSetting.center = CGPointMake(frame.size.width/2 ,frame.size.height-_btnSetting.frame.size.height/2.0 - Q(2));
-        _btnSetting.titleLabel.font = [UIFont fontWithName:Font size:14.0];
+        _btnSetting.titleLabel.font = [UIFont fontWithName:Font size:Q(14)];
         [_btnSetting setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_btnSetting setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
         
@@ -48,7 +48,7 @@
 //        [_btnAbout addTarget:self action:@selector(btnSettingSelected) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_btnAbout];
         _btnAbout.frame = CGRectMake(0, 0, Q(75), Q(38));
-        _btnAbout.titleLabel.font = [UIFont fontWithName:Font size:14.0];
+        _btnAbout.titleLabel.font = [UIFont fontWithName:Font size:Q(14)];
         [_btnAbout setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_btnAbout setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
         
@@ -59,14 +59,14 @@
         [self addSubview:_btnHelp];
         _btnHelp.frame = CGRectMake(0, 0, Q(75), Q(38));
        
-        _btnHelp.titleLabel.font = [UIFont fontWithName:Font size:14.0];
+        _btnHelp.titleLabel.font = [UIFont fontWithName:Font size:Q(14)];
         [_btnHelp setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_btnHelp setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
         
         _isMenuShow = NO;
         
         _lblBestScore = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, Q(200), Q(32))];
-        [_lblBestScore setFont:[UIFont fontWithName:Font size:14]];
+        [_lblBestScore setFont:[UIFont fontWithName:Font size:Q(14)]];
         [_lblBestScore setText:@"Your best: 1024"];
         [_lblBestScore setTextAlignment:NSTextAlignmentCenter];
         [self addSubview:_lblBestScore];
@@ -120,8 +120,15 @@
 - (void)btnStartSelected
 {
     [UIView beginAnimations:@"MainViewExit" context:nil];
+    [UIView setAnimationDuration:.3];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
     [UIView setAnimationDelegate:self];
     [UIView setAnimationDidStopSelector:@selector(exitDidFinished)];
+    [_btnStart setCenter:CGPointMake(_btnStart.center.x, -_btnStart.frame.size.height)];
+    [_lblBestScore setCenter:_btnStart.center];
+    [_btnSetting setCenter:CGPointMake(_btnSetting.center.x, self.frame.size.height+_btnSetting.frame.size.height)];
+    [_btnAbout setCenter:_btnSetting.center];
+    [_btnHelp setCenter:_btnHelp.center];
     [UIView commitAnimations];
 }
 

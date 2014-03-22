@@ -65,10 +65,10 @@
 //        _btnTurnDown.backgroundColor = [UIColor purpleColor];
         
         
-        [self addSubview:_btnTurnLeft];
-        [self addSubview:_btnTurnUp];
-        [self addSubview:_btnTurnRight];
-        [self addSubview:_btnTurnDown];
+//        [self addSubview:_btnTurnLeft];
+//        [self addSubview:_btnTurnUp];
+//        [self addSubview:_btnTurnRight];
+//        [self addSubview:_btnTurnDown];
         [_btnTurnLeft setTitle:@"<" forState:UIControlStateNormal];
         [_btnTurnUp setTitle:@"^" forState:UIControlStateNormal];
         [_btnTurnRight setTitle:@">" forState:UIControlStateNormal];
@@ -82,9 +82,37 @@
         [btnShare addTarget:self
                      action:@selector(Share)
            forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:btnShare];
+//        [self addSubview:btnShare];
         
+        _lblBack = [[UIView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, Q(64))];
+        _lblBack.backgroundColor = [UIColor colorWithRed:247.0/255.0 green:245.0/255.0 blue:240.0/255.0 alpha:1];
+        [self addSubview:_lblBack];
+
+        _lblScore = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, Q(40), Q(30))];
+        [_lblScore setCenter:CGPointMake(frame.size.width/2.0 + _lblScore.frame.size.width/2.0, _lblScore.frame.size.height)];
+        [_lblScore setFont:[UIFont fontWithName:Font size:Q(12)]];
+        [_lblScore setText:@"Score"];
+        [_lblScore setTextAlignment:NSTextAlignmentCenter];
+        [_lblBack addSubview:_lblScore];
+        _lblScoreText = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, Q(100), Q(30))];
+        [_lblScoreText setCenter:CGPointMake(_lblScore.center.x + Q(75), _lblScore.frame.size.height)];
+        [_lblScoreText setFont:[UIFont fontWithName:Font size:Q(18)]];
+        [_lblScoreText setText:@"1024100"];
+        [_lblScoreText setTextAlignment:NSTextAlignmentCenter];
+        [_lblBack addSubview:_lblScoreText];
         
+        _lblNumberText = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, Q(90), Q(30))];
+        [_lblNumberText setCenter:CGPointMake(_lblNumberText.frame.size.width/2.0, _lblNumberText.frame.size.height)];
+        [_lblNumberText setFont:[UIFont fontWithName:Font size:Q(12)]];
+        [_lblNumberText setText:@"Number"];
+        [_lblNumberText setTextAlignment:NSTextAlignmentCenter];
+        [_lblBack addSubview:_lblNumberText];
+        _lblNumber = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, Q(60), Q(30))];
+        [_lblNumber setCenter:CGPointMake(_lblNumberText.center.x + Q(65), _lblNumberText.frame.size.height)];
+        [_lblNumber setFont:[UIFont fontWithName:Font size:Q(18)]];
+        [_lblNumber setText:@"4096"];
+        [_lblNumber setTextAlignment:NSTextAlignmentCenter];
+        [_lblBack addSubview:_lblNumber];
     }
     return self;
 }
@@ -140,7 +168,16 @@
 - (void)Start
 {
     [self initBackground:_currentGameSize];
-    [self gameStart];
+    _baseView.center = CGPointMake(self.frame.size.width * 1.5, self.center.y);
+    
+    [_lblBack setCenter:CGPointMake(_lblBack.center.x, -_lblBack.frame.size.height/2.0)];
+    [_baseView moveToCenter:CGPointMake(self.frame.size.width/2.0, self.center.y)
+           withRebound:CGPointMake(-8, 0) delay:0
+            completion:^(BOOL finished) {
+                [self gameStart];
+                
+                [_lblBack moveToCenter:CGPointMake(_lblBack.center.x, _lblBack.frame.size.height/2.0) withRebound:CGPointMake(0, 8) delay:0];
+            }];
 }
 
 - (void)dealloc
@@ -362,10 +399,10 @@
                                                                     box.frame.size.height - 2)];
         block.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0, 0);
         [box creatBlock:block];
-        [block show];
         block.center = box.center;
-        block.number = (arc4random()%2 + 1) * 2;
+        [block setNumberDirectly:(arc4random()%2 + 1) * 2];
         [block refresh];
+        [block show];
         block.moveEnd = ^(GameBlock *b){
             
         };
@@ -381,12 +418,16 @@
     {
         [block moveToView:box.currentBlock];
         [block disappear];
+        __weak GameBlock* temp = block;
         block.moveEnd = ^(GameBlock *b){
-            [box.currentBlock refresh];
+            if (box.currentBlock != temp) {
+                [box.currentBlock refresh];
+            }
         };
         [box.currentBlock pop];
         box.currentBlock.number = result;
         box.currentBlock.hitable = false;
+        [box.currentBlock bounce:1.2 delay:.05 completion:NULL];
     }
     else
     {

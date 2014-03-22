@@ -40,6 +40,7 @@
 		18E1200B18D8F85500CC8C42 /* GameBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E1200A18D8F85500CC8C42 /* GameBox.m */; };
 		18E1200F18D909E200CC8C42 /* UIView+Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E1200E18D909E200CC8C42 /* UIView+Animation.m */; };
 		18F3C6FF18DB1B58006BCEF6 /* UIView+Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F3C6FE18DB1B58006BCEF6 /* UIView+Controller.m */; };
+		9677F2C418DDA16A004625AE /* CountView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9677F2C318DDA16A004625AE /* CountView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +112,8 @@
 		18E1200E18D909E200CC8C42 /* UIView+Animation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Animation.m"; sourceTree = "<group>"; };
 		18F3C6FD18DB1B58006BCEF6 /* UIView+Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Controller.h"; sourceTree = "<group>"; };
 		18F3C6FE18DB1B58006BCEF6 /* UIView+Controller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Controller.m"; sourceTree = "<group>"; };
+		9677F2C218DDA16A004625AE /* CountView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountView.h; sourceTree = "<group>"; };
+		9677F2C318DDA16A004625AE /* CountView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -291,6 +294,8 @@
 				18E1200718D8F77600CC8C42 /* GameBlock.m */,
 				18E1200918D8F85500CC8C42 /* GameBox.h */,
 				18E1200A18D8F85500CC8C42 /* GameBox.m */,
+				9677F2C218DDA16A004625AE /* CountView.h */,
+				9677F2C318DDA16A004625AE /* CountView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -431,6 +436,7 @@
 				18E11FFF18D8F44200CC8C42 /* MainViewController.m in Sources */,
 				18E1200818D8F77600CC8C42 /* GameBlock.m in Sources */,
 				18E11FD718D8F3C500CC8C42 /* main.m in Sources */,
+				9677F2C418DDA16A004625AE /* CountView.m in Sources */,
 				18E1200B18D8F85500CC8C42 /* GameBox.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,9 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "MainView.h"
 #import "GameView.h"
+#import "CountView.h"
+
 @interface MainViewController : UIViewController
 {
     MainView *_mainView;
     GameView *_gameView;
+    CountView *_countView;
 }
 @end

@@ -25,7 +25,16 @@ typedef enum GameDirection
     NSMutableArray *_gameBoxs;
     NSMutableArray *_gameBlocks;
     UIView *_baseView;
+    
+    UIView *_lblBack;
+    UILabel *_lblScoreText;
+    UILabel *_lblScore;
+    UILabel *_lblNumberText;
+    UILabel *_lblNumber;
 }
 @property (nonatomic, assign) int currentGameSize;
+@property (nonatomic, strong)void(^gameOver)();
+
 - (void)Start;
+
 @end

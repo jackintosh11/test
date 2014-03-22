@@ -20,54 +20,21 @@
                                                           0,
                                                           frame.size.width,
                                                           frame.size.height)];
-        _label.font = [UIFont fontWithName:@"Helvetica" size:Q(30)];
+        _label.font = [UIFont fontWithName:@"GillSans-Bold" size:Q(30)];
         _label.textAlignment = NSTextAlignmentCenter;
         [_label setAdjustsFontSizeToFitWidth:YES];
         [self addSubview:_label];
         self.hitable = YES;
-        // Initialization code
+
     }
     return self;
 }
 
 - (void)setNumber:(int)number
 {
-    _number = number;
-        int level = 0;
-    while (number > 0) {
-        number/=2;
-        level++;
-    }
-    if (level == 2)
-    {
-        [self changeBgColor:[UIColor colorWithRed:233/255. green:222/255. blue:209/255. alpha:1]];
-    }
-    else if (level == 3)
-    {
-        [self changeBgColor:[UIColor colorWithRed:232/255. green:117/255. blue:118/255. alpha:1]];
-    }
-    else if (level == 4)
-    {
-        [self changeBgColor:[UIColor colorWithRed:237/255. green:162/255. blue:102/255. alpha:1]];
-    }
-    else if (level == 5)
-    {
-        [self changeBgColor:[UIColor colorWithRed:241/255. green:101/255. blue:77/255. alpha:1]];
-
-    }
-    else if (level == 6)
-    {
-        [self changeBgColor:[UIColor colorWithRed:241/255. green:76/255. blue:46/255. alpha:1]];
-
-    }
-    else if (level == 7)
-    {
-        [self changeBgColor:[UIColor colorWithRed:232/255. green:198/255. blue:95/255. alpha:1]];
-
-    }
-    else if (level == 8)
-    {
-        [self changeBgColor:[UIColor colorWithRed:232/255. green:195/255. blue:75/255. alpha:1]];
+    if (number != _number) {
+        _number = number;
+        [self checkBackgroundColor:YES];
     }
 }
 - (void)refresh
@@ -117,6 +84,82 @@
 //    NSLog(@"moving %d,%d",self.x,self.y);
     [super moveToView:view];
     _isMoving = YES;
+}
+
+- (void)setNumberDirectly:(int)number
+{
+    if (_number != number) {
+        _number = number;
+        [self checkBackgroundColor:NO];
+    }
+}
+
+- (void)checkBackgroundColor:(BOOL)animated
+{
+    int number = _number;
+    int level = 0;
+    while (number > 0) {
+        number/=2;
+        level++;
+    }
+    UIColor *color;
+    if (level == 2)
+    {
+        color = [UIColor colorWithRed:235/255. green:227/255. blue:217/255. alpha:1];
+    }
+    else if (level == 3)
+    {
+        color = [UIColor colorWithRed:233/255. green:223/255. blue:199/255. alpha:1];
+    }
+    else if (level == 4)
+    {
+        color = [UIColor colorWithRed:226/255. green:176/255. blue:119/255. alpha:1];
+    }
+    else if (level == 5)
+    {
+        color = [UIColor colorWithRed:224/255. green:148/255. blue:97/255. alpha:1];
+        
+    }
+    else if (level == 6)
+    {
+        color = [UIColor colorWithRed:221/255. green:123/255. blue:92/255. alpha:1];
+        
+    }
+    else if (level == 7)
+    {
+        color = [UIColor colorWithRed:218/255. green:93/255. blue:55/255. alpha:1];
+        
+    }
+    else if (level == 8)
+    {
+        color = [UIColor colorWithRed:229/255. green:207/255. blue:113/255. alpha:1];
+    }
+    else if (level == 9)
+    {
+        color = [UIColor colorWithRed:229/255. green:204/255. blue:97/255. alpha:1];
+    }
+    else if (level == 10)
+    {
+        color = [UIColor colorWithRed:228/255. green:200/255. blue:80/255. alpha:1];
+    }
+    else
+    {
+        color = [UIColor colorWithRed:228/255. green:197/255. blue:80/255. alpha:1];
+    }
+    
+    if (level > 3) {
+        [_label setTextColor:[UIColor whiteColor]];
+    }
+    else {
+        [_label setTextColor:[UIColor colorWithRed:116/255. green:110/255. blue:101/255. alpha:1]];
+    }
+    
+    if (animated) {
+        [self changeBgColor:color];
+    }
+    else {
+        self.backgroundColor = color;
+    }
 }
 
 @end
