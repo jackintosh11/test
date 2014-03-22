@@ -138,6 +138,7 @@
     
     return image;
 }
+
 //
 //- (UIImage *)gameView
 //{
@@ -151,10 +152,12 @@
 
 - (void)Share
 {
+    [self restart];
+    return;
     NSLog(@"share");
     UIImage *img = [self convertViewToImage];
     NSLog(@"%@",img);
-    [UMSocialData defaultData].extConfig.wechatSessionData.title = @"q23";
+    [UMSocialData defaultData].extConfig.wechatSessionData.title = @"2048!";
     [UMSocialData defaultData].extConfig.wxMessageType = UMSocialWXMessageTypeApp;
 
     [UMSocialSnsService presentSnsIconSheetView:self.viewController
@@ -180,6 +183,24 @@
             }];
 }
 
+- (void)restart
+{
+    for (GameBlock *block in _gameBlocks) {
+        [block removeFromSuperview];
+    }
+    for (GameBlock *box in _gameBoxs) {
+        [box removeFromSuperview];
+    }
+    [_gameBlocks removeAllObjects];
+    [_gameBoxs removeAllObjects];
+    
+    for (UIView *view in [NSArray arrayWithArray:_baseView.subviews]) {
+        [view removeFromSuperview];
+    }
+    [self Start];
+//    _baseView
+    
+}
 - (void)dealloc
 {
     _gameBoxs = nil;
@@ -517,6 +538,11 @@
     {
         [self play:direction];
     }
+//    else
+//    {
+//        [self restart];
+//    }
     NSLog(@"touch end");
+    
 }
 @end

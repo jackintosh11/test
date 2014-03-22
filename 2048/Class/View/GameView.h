@@ -36,5 +36,5 @@ typedef enum GameDirection
 @property (nonatomic, strong)void(^gameOver)();
 
 - (void)Start;
-
+- (void)restart;
 @end
