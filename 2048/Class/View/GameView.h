@@ -40,5 +40,5 @@ typedef enum GameDirection
 @property (nonatomic, strong)void(^gameOver)(int score, int max);
 
 - (void)Start;
-
+- (void)restart;
 @end

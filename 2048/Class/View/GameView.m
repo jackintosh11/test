@@ -139,6 +139,7 @@
     
     return image;
 }
+
 //
 //- (UIImage *)gameView
 //{
@@ -181,6 +182,24 @@
             }];
 }
 
+- (void)restart
+{
+    for (GameBlock *block in _gameBlocks) {
+        [block removeFromSuperview];
+    }
+    for (GameBlock *box in _gameBoxs) {
+        [box removeFromSuperview];
+    }
+    [_gameBlocks removeAllObjects];
+    [_gameBoxs removeAllObjects];
+    
+    for (UIView *view in [NSArray arrayWithArray:_baseView.subviews]) {
+        [view removeFromSuperview];
+    }
+    [self Start];
+//    _baseView
+    
+}
 - (void)dealloc
 {
     _gameBoxs = nil;
@@ -518,7 +537,12 @@
     {
         [self play:direction];
     }
+//    else
+//    {
+//        [self restart];
+//    }
     NSLog(@"touch end");
+    
 }
 
 - (void)menuSelected
