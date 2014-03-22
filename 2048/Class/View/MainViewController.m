@@ -31,7 +31,7 @@
             this.view = game;
             [game Start];
         };
-        _gameView.gameOver = ^() {
+        _gameView.gameOver = ^(int score, int max) {
             this.view = count;
             [count enter];
         };

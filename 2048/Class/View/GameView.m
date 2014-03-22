@@ -523,8 +523,27 @@
 
 - (void)menuSelected
 {
-    [self exit:^(BOOL finished) {
-        _gameOver();
+//    [self exit:^(BOOL finished) {
+//        _gameOver(0, 0);
+//    }];
+    
+    if (!_popup) {
+        _popup = [[PopupMenu alloc] initWithFrame:_baseView.frame];
+        
+        __weak UIView *base = _baseView;
+        __weak UIView *this = self;
+        __weak UIView *popup = _popup;
+        _popup.resumeCallback = ^(BOOL finished) {
+            [popup removeFromSuperview];
+            [base moveToCenter:CGPointMake(this.frame.size.width/2.0, this.center.y) withRebound:CGPointMake(8, 0) delay:0];
+        };
+    }
+    
+    [UIView animateWithDuration:.3 animations:^{
+        _baseView.center = CGPointMake(-_baseView.frame.size.width/2.0, _baseView.center.y);
+    } completion:^(BOOL finished) {
+        [self addSubview:_popup];
+        [_popup enter];
     }];
 }
 

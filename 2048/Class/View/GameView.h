@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PopupMenu.h"
+
 typedef enum GameDirection
 {
     GameDirectionTurnLeft = 1,
@@ -31,9 +33,11 @@ typedef enum GameDirection
     UILabel *_lblScore;
     UILabel *_lblNumberText;
     UILabel *_lblNumber;
+    
+    PopupMenu *_popup;
 }
 @property (nonatomic, assign) int currentGameSize;
-@property (nonatomic, strong)void(^gameOver)();
+@property (nonatomic, strong)void(^gameOver)(int score, int max);
 
 - (void)Start;
 

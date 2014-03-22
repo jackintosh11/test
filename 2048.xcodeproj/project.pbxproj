@@ -41,6 +41,7 @@
 		18E1200F18D909E200CC8C42 /* UIView+Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E1200E18D909E200CC8C42 /* UIView+Animation.m */; };
 		18F3C6FF18DB1B58006BCEF6 /* UIView+Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F3C6FE18DB1B58006BCEF6 /* UIView+Controller.m */; };
 		9677F2C418DDA16A004625AE /* CountView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9677F2C318DDA16A004625AE /* CountView.m */; };
+		9677F2C718DDD1DA004625AE /* PopupMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 9677F2C618DDD1DA004625AE /* PopupMenu.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,6 +115,8 @@
 		18F3C6FE18DB1B58006BCEF6 /* UIView+Controller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Controller.m"; sourceTree = "<group>"; };
 		9677F2C218DDA16A004625AE /* CountView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountView.h; sourceTree = "<group>"; };
 		9677F2C318DDA16A004625AE /* CountView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountView.m; sourceTree = "<group>"; };
+		9677F2C518DDD1DA004625AE /* PopupMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopupMenu.h; sourceTree = "<group>"; };
+		9677F2C618DDD1DA004625AE /* PopupMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopupMenu.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -296,6 +299,8 @@
 				18E1200A18D8F85500CC8C42 /* GameBox.m */,
 				9677F2C218DDA16A004625AE /* CountView.h */,
 				9677F2C318DDA16A004625AE /* CountView.m */,
+				9677F2C518DDD1DA004625AE /* PopupMenu.h */,
+				9677F2C618DDD1DA004625AE /* PopupMenu.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -429,6 +434,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18E11FDB18D8F3C500CC8C42 /* AppDelegate.m in Sources */,
+				9677F2C718DDD1DA004625AE /* PopupMenu.m in Sources */,
 				18E1200F18D909E200CC8C42 /* UIView+Animation.m in Sources */,
 				18E1200518D8F4B900CC8C42 /* GameView.m in Sources */,
 				18F3C6FF18DB1B58006BCEF6 /* UIView+Controller.m in Sources */,
