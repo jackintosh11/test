@@ -8,19 +8,27 @@
 
 #import "AppDelegate.h"
 #import "UMSocial.h"
+//#import "MobClick.h"
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+ //   [MobClick startWithAppkey:AppKey_um reportPolicy:SEND_INTERVAL   channelId:@""];
     [UMSocialData setAppKey:AppKey_um];
     [UMSocialConfig setWXAppId:AppKey_um url:nil];
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+   // [MobClick setAppVersion:version];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     _mainViewController = [[MainViewController alloc] init];
     self.window.rootViewController = _mainViewController;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+ //   [MobClick startWithAppkey:AppKey_um];
+//    [MobClick checkUpdate];
     return YES;
 }
+
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {

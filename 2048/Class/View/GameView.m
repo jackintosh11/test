@@ -10,10 +10,13 @@
 #import "GameBox.h"
 #import "GameBlock.h"
 #import "UIView+Animation.h"
+#import "UIView+Controller.h"
 #import "Global.h"
+
 //#import "UIView+Controller.h"
 
 @implementation GameView
+
 
 - (id)initWithFrame:(CGRect)frame
 {
