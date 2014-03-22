@@ -400,7 +400,7 @@
         block.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0, 0);
         [box creatBlock:block];
         block.center = box.center;
-        [block setNumberDirectly:(arc4random()%2 + 1) * 2];
+        [block setNumberDirectly:arc4random()%6 < 5?2:4];
         [block refresh];
         [block show];
         block.moveEnd = ^(GameBlock *b){
@@ -424,10 +424,9 @@
                 [box.currentBlock refresh];
             }
         };
-        [box.currentBlock pop];
         box.currentBlock.number = result;
         box.currentBlock.hitable = false;
-        [box.currentBlock bounce:1.2 delay:.05 completion:NULL];
+//        [box.currentBlock bounce:1.2 delay:.05 completion:NULL];
     }
     else
     {
