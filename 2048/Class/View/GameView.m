@@ -561,6 +561,7 @@
             [base moveToCenter:CGPointMake(this.frame.size.width/2.0, this.center.y) withRebound:CGPointMake(8, 0) delay:0];
         };
         _popup.exitCallback = ^(BOOL finished) {
+            [popup removeFromSuperview];
             this.gameOver(0, 0);
         };
         _popup.restartCallback = ^(BOOL finished) {
