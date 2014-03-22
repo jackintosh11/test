@@ -12,7 +12,7 @@
 #import "UIView+Controller.h"
 #import "GameBox.h"
 #import "GameBlock.h"
-
+#import "AudioHelper.h"
 @implementation MainView
 
 - (id)initWithFrame:(CGRect)frame
@@ -156,6 +156,7 @@
 
 - (void)btnStartSelected
 {
+    [AudioHelper click];
     [UIView beginAnimations:@"MainViewExit" context:nil];
     [UIView setAnimationDuration:.3];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
@@ -180,6 +181,7 @@
 
 - (void)btnSettingSelected
 {
+    [AudioHelper click];
     float centerx = self.frame.size.width/2;
     if (_isMenuShow) {
         _isMenuShow = NO;

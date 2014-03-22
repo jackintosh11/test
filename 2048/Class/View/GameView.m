@@ -12,7 +12,7 @@
 #import "UIView+Animation.h"
 #import "UIView+Controller.h"
 #import "Global.h"
-
+#import "AudioHelper.h"
 //#import "UIView+Controller.h"
 
 @implementation GameView
@@ -240,7 +240,16 @@
 
 - (void)play:(GameDirection)direction
 {
+    int originCount = _gameBlocks.count;
     BOOL moved = [self moveBlocksWithDicrection:direction];
+    if (originCount > _gameBlocks.count)
+    {
+        [AudioHelper crash];
+    }
+    else
+    {
+        [AudioHelper slide];
+    }
     if (moved)
     {
         [self CreateNewCell];
@@ -571,19 +580,19 @@
     
     int absX = abs(touchLocation.x - _lastTouchLocation.x);
     int absY = abs(touchLocation.y - _lastTouchLocation.y);
-    if ((touchLocation.x - _lastTouchLocation.x)/absY > 2)
+    if ((touchLocation.x - _lastTouchLocation.x)/absY > 1.5)
     {
         direction = GameDirectionTurnRight;
     }
-    else if ((_lastTouchLocation.x - touchLocation.x)/absY > 2)
+    else if ((_lastTouchLocation.x - touchLocation.x)/absY > 1.5)
     {
         direction = GameDirectionTurnLeft;
     }
-    else if ((touchLocation.y - _lastTouchLocation.y)/absX > 2)
+    else if ((touchLocation.y - _lastTouchLocation.y)/absX > 1.5)
     {
         direction = GameDirectionTurnDown;
     }
-    else if ((_lastTouchLocation.y - touchLocation.y)/absX > 2)
+    else if ((_lastTouchLocation.y - touchLocation.y)/absX > 1.5)
     {
         direction = GameDirectionTurnUp;
     }
@@ -601,6 +610,7 @@
 
 - (void)menuSelected
 {
+    [AudioHelper click];
 //    [self exit:^(BOOL finished) {
 //        _gameOver(0, 0);
 //    }];
@@ -640,11 +650,13 @@
 
 - (void)highlightMenu
 {
+    [AudioHelper click];
     _btnMenu.backgroundColor = _btnMenu.backgroundColor = [UIColor colorWithRed:207.0/255.0 green:205.0/255.0 blue:200.0/255.0 alpha:1];
 }
 
 - (void)unhighlightMenu
 {
+    [AudioHelper click];
     _btnMenu.backgroundColor = _btnMenu.backgroundColor = [UIColor colorWithRed:247.0/255.0 green:245.0/255.0 blue:240.0/255.0 alpha:1];
 }
 

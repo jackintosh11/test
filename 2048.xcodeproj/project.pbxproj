@@ -24,6 +24,9 @@
 		188C985C18DDF8310006DF86 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188C985B18DDF8310006DF86 /* StoreKit.framework */; };
 		188C986218DDFC010006DF86 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188C986118DDFC010006DF86 /* AVFoundation.framework */; };
 		188C986418DDFC130006DF86 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188C986318DDFC130006DF86 /* CoreTelephony.framework */; };
+		188C986618DE03AC0006DF86 /* button_click.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 188C986518DE03AC0006DF86 /* button_click.mp3 */; };
+		188C986A18DE04070006DF86 /* AudioHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 188C986918DE04070006DF86 /* AudioHelper.m */; };
+		188C987818DE0EF60006DF86 /* woosh.aif in Resources */ = {isa = PBXBuildFile; fileRef = 188C987718DE0EF60006DF86 /* woosh.aif */; };
 		18C208D018DB339000C548E3 /* UMSocialLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 18C208B118DB339000C548E3 /* UMSocialLocalizable.strings */; };
 		18C208D118DB339000C548E3 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18C208B518DB339000C548E3 /* libWeChatSDK.a */; };
 		18C208D218DB339000C548E3 /* libUMSocial_Sdk_3.3.4.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18C208C418DB339000C548E3 /* libUMSocial_Sdk_3.3.4.a */; };
@@ -95,6 +98,10 @@
 		188C985B18DDF8310006DF86 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		188C986118DDFC010006DF86 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		188C986318DDFC130006DF86 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		188C986518DE03AC0006DF86 /* button_click.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = button_click.mp3; sourceTree = "<group>"; };
+		188C986818DE04070006DF86 /* AudioHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioHelper.h; sourceTree = "<group>"; };
+		188C986918DE04070006DF86 /* AudioHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioHelper.m; sourceTree = "<group>"; };
+		188C987718DE0EF60006DF86 /* woosh.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = woosh.aif; sourceTree = "<group>"; };
 		18C208B218DB339000C548E3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/UMSocialLocalizable.strings; sourceTree = "<group>"; };
 		18C208B518DB339000C548E3 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		18C208B618DB339000C548E3 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
@@ -159,6 +166,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				188C967618DDF4800006DF86 /* AudioToolbox.framework in Frameworks */,
 				188C986418DDFC130006DF86 /* CoreTelephony.framework in Frameworks */,
 				188C986218DDFC010006DF86 /* AVFoundation.framework in Frameworks */,
 				188C985C18DDF8310006DF86 /* StoreKit.framework in Frameworks */,
@@ -168,7 +176,6 @@
 				188C967C18DDF4990006DF86 /* AdSupport.framework in Frameworks */,
 				188C967A18DDF4910006DF86 /* SystemConfiguration.framework in Frameworks */,
 				188C967818DDF4860006DF86 /* MessageUI.framework in Frameworks */,
-				188C967618DDF4800006DF86 /* AudioToolbox.framework in Frameworks */,
 				188C949A18DDEECF0006DF86 /* libz.dylib in Frameworks */,
 				188C985318DDF81D0006DF86 /* libGoogleAdMobAds.a in Frameworks */,
 				18E11FCD18D8F3C400CC8C42 /* CoreGraphics.framework in Frameworks */,
@@ -195,6 +202,8 @@
 		180C44EC18D9A57200876160 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				188C987718DE0EF60006DF86 /* woosh.aif */,
+				188C986518DE03AC0006DF86 /* button_click.mp3 */,
 				182EEB2118D9DBB100CB4C5D /* left.png */,
 				182EEB2218D9DBB100CB4C5D /* up.png */,
 				182EEB2318D9DBB100CB4C5D /* right.png */,
@@ -219,6 +228,15 @@
 				188C980518DDF81C0006DF86 /* README.txt */,
 			);
 			path = "GoogleAdMobAdsSdkiOS-6.8.0";
+			sourceTree = "<group>";
+		};
+		188C986718DE03F60006DF86 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				188C986818DE04070006DF86 /* AudioHelper.h */,
+				188C986918DE04070006DF86 /* AudioHelper.m */,
+			);
+			path = Audio;
 			sourceTree = "<group>";
 		};
 		18C208B018DB339000C548E3 /* UMSocial_Sdk_3.3.4 */ = {
@@ -355,6 +373,7 @@
 		18E11FF918D8F40E00CC8C42 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				188C986718DE03F60006DF86 /* Audio */,
 				18E11FFB18D8F40E00CC8C42 /* View */,
 			);
 			path = Class;
@@ -480,6 +499,7 @@
 				182EEB2718D9DBB100CB4C5D /* right.png in Resources */,
 				18E11FD518D8F3C500CC8C42 /* InfoPlist.strings in Resources */,
 				18C208D718DB339000C548E3 /* UMShareEditViewControlleriPad.xib in Resources */,
+				188C986618DE03AC0006DF86 /* button_click.mp3 in Resources */,
 				18E11FDD18D8F3C500CC8C42 /* Images.xcassets in Resources */,
 				188C985418DDF81D0006DF86 /* README.txt in Resources */,
 				182EEB2618D9DBB100CB4C5D /* up.png in Resources */,
@@ -488,6 +508,7 @@
 				182EEB2518D9DBB100CB4C5D /* left.png in Resources */,
 				182EEB2818D9DBB100CB4C5D /* down.png in Resources */,
 				18C208D418DB339000C548E3 /* UMSCommentInputController.xib in Resources */,
+				188C987818DE0EF60006DF86 /* woosh.aif in Resources */,
 				18C208DB18DB339000C548E3 /* UMSocialSDKResourcesNew.bundle in Resources */,
 				18C208D318DB339000C548E3 /* UMSCommentDetailController.xib in Resources */,
 				18C208D618DB339000C548E3 /* UMShareEditViewController.xib in Resources */,
@@ -513,6 +534,7 @@
 			files = (
 				18E11FDB18D8F3C500CC8C42 /* AppDelegate.m in Sources */,
 				9677F2C718DDD1DA004625AE /* PopupMenu.m in Sources */,
+				188C986A18DE04070006DF86 /* AudioHelper.m in Sources */,
 				18E1200F18D909E200CC8C42 /* UIView+Animation.m in Sources */,
 				18E1200518D8F4B900CC8C42 /* GameView.m in Sources */,
 				18F3C6FF18DB1B58006BCEF6 /* UIView+Controller.m in Sources */,
