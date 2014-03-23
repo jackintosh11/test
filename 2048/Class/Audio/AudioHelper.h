@@ -17,4 +17,7 @@
 + (void)crash;
 
 + (void)slide;
+
++ (void)error;
+
 @end

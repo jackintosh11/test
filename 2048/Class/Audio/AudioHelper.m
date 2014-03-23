@@ -35,4 +35,10 @@
 //    [AudioHelper play:@"OpenPage.wav"];
     
 }
+
++ (void)error
+{
+    [AudioHelper play:@"down.mp3"];
+}
+
 @end

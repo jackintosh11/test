@@ -42,7 +42,7 @@
         _btnSetting = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [_btnSetting setTitle:@"Menu" forState:UIControlStateNormal];
         [_btnSetting addTarget:self action:@selector(btnSettingSelected) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:_btnSetting];
+//        [self addSubview:_btnSetting];
         _btnSetting.frame = CGRectMake(0, 0, Q(75), Q(38));
         _btnSetting.center = CGPointMake(frame.size.width/2 ,frame.size.height-_btnSetting.frame.size.height/2.0 - Q(2));
         _btnSetting.titleLabel.font = [UIFont fontWithName:Font size:Q(14)];

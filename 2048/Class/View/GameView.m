@@ -255,6 +255,9 @@
     {
         [self CreateNewCell];
     }
+    else {
+        [AudioHelper error];
+    }
     [self resetBlock];
     
     if (!self.isGameOver && [self checkGameOver]) {
@@ -666,7 +669,6 @@
 
 - (void)highlightMenu
 {
-    [AudioHelper click];
     _btnMenu.backgroundColor = _btnMenu.backgroundColor = [UIColor colorWithRed:207.0/255.0 green:205.0/255.0 blue:200.0/255.0 alpha:1];
 }
 
