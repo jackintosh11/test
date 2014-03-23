@@ -8,7 +8,7 @@
 
 #import "PopupMenu.h"
 #import "UIView+Animation.h"
-
+#import "AudioHelper.h"
 @implementation PopupMenu
 
 - (id)initWithFrame:(CGRect)frame
@@ -56,11 +56,13 @@
 
 - (void)btnResumeSelected
 {
+    [AudioHelper click];
     [self exit:_resumeCallback];
 }
 
 - (void)btnRestartSelected
 {
+    [AudioHelper click];
     [UIView animateWithDuration:.3 animations:^{
         _btnRestart.center = CGPointMake(-_btnRestart.frame.size.width ,_btnRestart.center.y);
         _btnResume.center = CGPointMake(-_btnRestart.frame.size.width ,_btnResume.center.y);
@@ -70,6 +72,7 @@
 
 - (void)btnExitSelected
 {
+    [AudioHelper click];
     if (_exitCallback) {
         _exitCallback(true);
     }

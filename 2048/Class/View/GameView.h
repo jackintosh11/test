@@ -42,7 +42,7 @@ typedef enum GameDirection
 @property (nonatomic, assign) int currentGameSize;
 @property (nonatomic, strong)void(^gameOver)(int score, int max);
 @property (nonatomic, strong) UIImage *snap;
-
+@property (nonatomic, assign) BOOL isGameOver;
 - (void)Start;
 - (void)restart;
 @end

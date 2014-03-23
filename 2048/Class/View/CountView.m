@@ -10,7 +10,7 @@
 #import "UIView+Controller.h"
 #import "UMSocial.h"
 #import "UIView+Animation.h"
-
+#import "AudioHelper.h"
 @implementation CountView
 
 - (id)initWithFrame:(CGRect)frame
@@ -72,6 +72,7 @@
 
 - (void)btnShareSelected
 {
+    [AudioHelper click];
     [UMSocialSnsService presentSnsIconSheetView:self.viewController
                                          appKey:AppKey_um
                                       shareText:@"Check out my score on 2048! http://goo.gl/NcAFrc"
@@ -82,6 +83,7 @@
 
 - (void)btnDoneSelected
 {
+    [AudioHelper click];
     [self exit];
 }
 

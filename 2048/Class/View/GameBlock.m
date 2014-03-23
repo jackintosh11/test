@@ -44,7 +44,6 @@
 {
     if (_label.text.length && [_label.text intValue] != _number)
     {
-        NSLog(@"%@:%d",self,_number);
         [self pop];
     }
     [_label setText:[NSString stringWithFormat:@"%d",_number]];
@@ -88,9 +87,7 @@
 {
     if (_isMoving)
     {
-        NSLog(@"!!!!!");
     }
-//    NSLog(@"moving %d,%d",self.x,self.y);
     [super moveToView:view];
     _isMoving = YES;
 }

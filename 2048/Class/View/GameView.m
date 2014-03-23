@@ -12,7 +12,7 @@
 #import "UIView+Animation.h"
 #import "UIView+Controller.h"
 #import "Global.h"
-
+#import "AudioHelper.h"
 //#import "UIView+Controller.h"
 
 @implementation GameView
@@ -88,7 +88,8 @@
         
         _btnMenu = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         _btnMenu.frame = CGRectMake(0, 0, frame.size.width, Q(64));
-        [self unhighlightMenu];
+        _btnMenu.backgroundColor = _btnMenu.backgroundColor = [UIColor colorWithRed:247.0/255.0 green:245.0/255.0 blue:240.0/255.0 alpha:1];
+        
         [_btnMenu addTarget:self action:@selector(menuSelected) forControlEvents:UIControlEventTouchUpInside];
         [_btnMenu addTarget:self action:@selector(highlightMenu) forControlEvents:UIControlEventTouchDown];
         [_btnMenu addTarget:self action:@selector(unhighlightMenu) forControlEvents:UIControlEventTouchUpOutside];
@@ -240,14 +241,24 @@
 
 - (void)play:(GameDirection)direction
 {
+    int originCount = _gameBlocks.count;
     BOOL moved = [self moveBlocksWithDicrection:direction];
+    if (originCount > _gameBlocks.count)
+    {
+        [AudioHelper crash];
+    }
+    else
+    {
+        [AudioHelper slide];
+    }
     if (moved)
     {
         [self CreateNewCell];
     }
     [self resetBlock];
     
-    if ([self checkGameOver]) {
+    if (!self.isGameOver && [self checkGameOver]) {
+        self.isGameOver = YES;
         [self performSelector:@selector(finishGame) withObject:nil afterDelay:1.5];
     }
 }
@@ -260,16 +271,16 @@
             return NO;
         }
     }
-    if ([self moveBlocksWithDicrection:GameDirectionTurnDown]) {
+    if ([self tryMoveBlocksWithDicrection:GameDirectionTurnDown]) {
         return NO;
     }
-    if ([self moveBlocksWithDicrection:GameDirectionTurnRight]) {
+    if ([self tryMoveBlocksWithDicrection:GameDirectionTurnRight]) {
         return NO;
     }
-    if ([self moveBlocksWithDicrection:GameDirectionTurnUp]) {
+    if ([self tryMoveBlocksWithDicrection:GameDirectionTurnUp]) {
         return NO;
     }
-    if ([self moveBlocksWithDicrection:GameDirectionTurnLeft]) {
+    if ([self tryMoveBlocksWithDicrection:GameDirectionTurnLeft]) {
         return NO;
     }
     return YES;
@@ -277,6 +288,7 @@
 
 - (void)finishGame
 {
+    self.isGameOver = NO;
     int score = self.score;
     int max = self.maxNumber;
     [self exit:^(BOOL finished) {
@@ -430,6 +442,24 @@
     return results;
 }
 
+- (BOOL)tryMoveBlocksWithDicrection:(GameDirection)direction
+{
+    BOOL moved = NO;
+    NSArray *blocks = [self getAllBlocksWithDicrection:direction];
+    for (GameBlock *block in blocks) {
+        NSArray *boxes = [self getBoxesWithx:block.x y:block.y direction:direction];
+        for (GameBox *box in boxes) {
+            if ([box hit:block] && [self isConnected:block toBox:box])
+            {
+                //[self hitBlock:block intoBox:box];
+                moved = YES;
+                break;
+            }
+        }
+    }
+    return moved;
+}
+
 
 - (BOOL)moveBlocksWithDicrection:(GameDirection)direction
 {
@@ -571,32 +601,28 @@
     
     int absX = abs(touchLocation.x - _lastTouchLocation.x);
     int absY = abs(touchLocation.y - _lastTouchLocation.y);
-    if ((touchLocation.x - _lastTouchLocation.x)/absY > 2)
+    int ratio = 1.3;
+    if ((touchLocation.x - _lastTouchLocation.x)/absY > ratio && absX > 20)
     {
         direction = GameDirectionTurnRight;
     }
-    else if ((_lastTouchLocation.x - touchLocation.x)/absY > 2)
+    else if ((_lastTouchLocation.x - touchLocation.x)/absY > ratio && absX > 20)
     {
         direction = GameDirectionTurnLeft;
     }
-    else if ((touchLocation.y - _lastTouchLocation.y)/absX > 2)
+    else if ((touchLocation.y - _lastTouchLocation.y)/absX > ratio && absY > 20)
     {
         direction = GameDirectionTurnDown;
     }
-    else if ((_lastTouchLocation.y - touchLocation.y)/absX > 2)
+    else if ((_lastTouchLocation.y - touchLocation.y)/absX > ratio && absY > 20)
     {
         direction = GameDirectionTurnUp;
     }
     if ((int)direction != -1)
     {
+        NSLog(@"play :%d    %d,%d",direction,absX,absY);
         [self play:direction];
     }
-//    else
-//    {
-//        [self restart];
-//    }
-    NSLog(@"touch end");
-    
 }
 
 - (void)menuSelected
@@ -640,11 +666,13 @@
 
 - (void)highlightMenu
 {
+    [AudioHelper click];
     _btnMenu.backgroundColor = _btnMenu.backgroundColor = [UIColor colorWithRed:207.0/255.0 green:205.0/255.0 blue:200.0/255.0 alpha:1];
 }
 
 - (void)unhighlightMenu
 {
+    [AudioHelper click];
     _btnMenu.backgroundColor = _btnMenu.backgroundColor = [UIColor colorWithRed:247.0/255.0 green:245.0/255.0 blue:240.0/255.0 alpha:1];
 }
 

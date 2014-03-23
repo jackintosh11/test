@@ -101,20 +101,15 @@
 }
 // We've received an ad successfully.
 - (void)adViewDidReceiveAd:(GADBannerView *)adView {
-    NSLog(@"Received ad successfully");
+    //NSLog(@"Received ad successfully");
 }
 
 - (void)adView:(GADBannerView *)view didFailToReceiveAdWithError:(GADRequestError *)error {
-    NSLog(@"Failed to receive ad with error: %@", [error localizedFailureReason]);
+    //NSLog(@"Failed to receive ad with error: %@", [error localizedFailureReason]);
 }
 - (GADRequest *)request {
     GADRequest *request = [GADRequest request];
-    
-    // Make the request for a test ad. Put in an identifier for the simulator as well as any devices
-    // you want to receive test ads.
     request.testDevices = @[
-                            // TODO: Add your device/simulator test identifiers here. Your device identifier is printed to
-                            // the console when the app is launched.
                             GAD_SIMULATOR_ID
                             ];
     return request;
