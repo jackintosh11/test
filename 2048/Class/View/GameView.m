@@ -602,19 +602,19 @@
     int absX = abs(touchLocation.x - _lastTouchLocation.x);
     int absY = abs(touchLocation.y - _lastTouchLocation.y);
     int ratio = 1.3;
-    if ((touchLocation.x - _lastTouchLocation.x)/absY > ratio)
+    if ((touchLocation.x - _lastTouchLocation.x)/absY > ratio && absX > 20)
     {
         direction = GameDirectionTurnRight;
     }
-    else if ((_lastTouchLocation.x - touchLocation.x)/absY > ratio)
+    else if ((_lastTouchLocation.x - touchLocation.x)/absY > ratio && absX > 20)
     {
         direction = GameDirectionTurnLeft;
     }
-    else if ((touchLocation.y - _lastTouchLocation.y)/absX > ratio)
+    else if ((touchLocation.y - _lastTouchLocation.y)/absX > ratio && absY > 20)
     {
         direction = GameDirectionTurnDown;
     }
-    else if ((_lastTouchLocation.y - touchLocation.y)/absX > ratio)
+    else if ((_lastTouchLocation.y - touchLocation.y)/absX > ratio && absY > 20)
     {
         direction = GameDirectionTurnUp;
     }
