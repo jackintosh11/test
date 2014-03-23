@@ -271,16 +271,16 @@
             return NO;
         }
     }
-    if ([self moveBlocksWithDicrection:GameDirectionTurnDown]) {
+    if ([self tryMoveBlocksWithDicrection:GameDirectionTurnDown]) {
         return NO;
     }
-    if ([self moveBlocksWithDicrection:GameDirectionTurnRight]) {
+    if ([self tryMoveBlocksWithDicrection:GameDirectionTurnRight]) {
         return NO;
     }
-    if ([self moveBlocksWithDicrection:GameDirectionTurnUp]) {
+    if ([self tryMoveBlocksWithDicrection:GameDirectionTurnUp]) {
         return NO;
     }
-    if ([self moveBlocksWithDicrection:GameDirectionTurnLeft]) {
+    if ([self tryMoveBlocksWithDicrection:GameDirectionTurnLeft]) {
         return NO;
     }
     return YES;
@@ -440,6 +440,24 @@
 
     }
     return results;
+}
+
+- (BOOL)tryMoveBlocksWithDicrection:(GameDirection)direction
+{
+    BOOL moved = NO;
+    NSArray *blocks = [self getAllBlocksWithDicrection:direction];
+    for (GameBlock *block in blocks) {
+        NSArray *boxes = [self getBoxesWithx:block.x y:block.y direction:direction];
+        for (GameBox *box in boxes) {
+            if ([box hit:block] && [self isConnected:block toBox:box])
+            {
+                //[self hitBlock:block intoBox:box];
+                moved = YES;
+                break;
+            }
+        }
+    }
+    return moved;
 }
 
 
@@ -602,14 +620,9 @@
     }
     if ((int)direction != -1)
     {
+        NSLog(@"play :%d    %d,%d",direction,absX,absY);
         [self play:direction];
     }
-//    else
-//    {
-//        [self restart];
-//    }
-    NSLog(@"touch end");
-    
 }
 
 - (void)menuSelected

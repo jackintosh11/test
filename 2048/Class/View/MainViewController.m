@@ -101,11 +101,11 @@
 }
 // We've received an ad successfully.
 - (void)adViewDidReceiveAd:(GADBannerView *)adView {
-    NSLog(@"Received ad successfully");
+    //NSLog(@"Received ad successfully");
 }
 
 - (void)adView:(GADBannerView *)view didFailToReceiveAdWithError:(GADRequestError *)error {
-    NSLog(@"Failed to receive ad with error: %@", [error localizedFailureReason]);
+    //NSLog(@"Failed to receive ad with error: %@", [error localizedFailureReason]);
 }
 - (GADRequest *)request {
     GADRequest *request = [GADRequest request];
