@@ -73,6 +73,7 @@
 - (void)btnShareSelected
 {
     [AudioHelper click];
+    [UMSocialData defaultData].extConfig.wechatTimelineData.url = @"http://goo.gl/NcAFrc";
     [UMSocialSnsService presentSnsIconSheetView:self.viewController
                                          appKey:AppKey_um
                                       shareText:@"Check out my score on 2048! http://goo.gl/NcAFrc"
