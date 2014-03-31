@@ -78,7 +78,7 @@
 //        [_btnTurnDown setTitle:@"V" forState:UIControlStateNormal];
         
         _currentGameSize = 4;
-//        UIButton *btnShare = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+//        UIButton *btnShare = [UIButton UIButtonTypeCustom];
 //        [btnShare setTitle:@"share" forState:UIControlStateNormal];
 //        btnShare.frame = CGRectMake(frame.size.width - 100, 20, 50, 50);
 //        [btnShare addTarget:self
@@ -86,40 +86,41 @@
 //           forControlEvents:UIControlEventTouchUpInside];
 //        [self addSubview:btnShare];
         
-        _btnMenu = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        _btnMenu = [UIButton buttonWithType:UIButtonTypeCustom];
         _btnMenu.frame = CGRectMake(0, 0, frame.size.width, Q(64));
-        _btnMenu.backgroundColor = _btnMenu.backgroundColor = [UIColor colorWithRed:247.0/255.0 green:245.0/255.0 blue:240.0/255.0 alpha:1];
+        _btnMenu.backgroundColor = [UIColor colorWithRed:227.0/255.0 green:225.0/255.0 blue:220.0/255.0 alpha:1];
         
         [_btnMenu addTarget:self action:@selector(menuSelected) forControlEvents:UIControlEventTouchUpInside];
         [_btnMenu addTarget:self action:@selector(highlightMenu) forControlEvents:UIControlEventTouchDown];
         [_btnMenu addTarget:self action:@selector(unhighlightMenu) forControlEvents:UIControlEventTouchUpOutside];
         [self addSubview:_btnMenu];
 
-        _lblScoreText = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, Q(40), Q(30))];
+        _lblScoreText = [[UILabel alloc] initClearWithFrame:CGRectMake(0, 0, Q(40), Q(30))];
         [_lblScoreText setCenter:CGPointMake(frame.size.width/2.0 + _lblScoreText.frame.size.width/2.0, _lblScoreText.frame.size.height)];
         [_lblScoreText setFont:[UIFont fontWithName:Font size:Q(12)]];
         [_lblScoreText setText:@"Score"];
         [_lblScoreText setTextAlignment:NSTextAlignmentCenter];
         [_btnMenu addSubview:_lblScoreText];
-        _lblScore = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, Q(100), Q(30))];
+        _lblScore = [[UILabel alloc] initClearWithFrame:CGRectMake(0, 0, Q(100), Q(30))];
         [_lblScore setCenter:CGPointMake(_lblScoreText.center.x + Q(75), _lblScoreText.frame.size.height)];
         [_lblScore setFont:[UIFont fontWithName:Font size:Q(18)]];
         [_lblScore setText:@"0"];
         [_lblScore setTextAlignment:NSTextAlignmentCenter];
         [_btnMenu addSubview:_lblScore];
         
-        _lblNumberText = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, Q(90), Q(30))];
+        _lblNumberText = [[UILabel alloc] initClearWithFrame:CGRectMake(0, 0, Q(90), Q(30))];
         [_lblNumberText setCenter:CGPointMake(_lblNumberText.frame.size.width/2.0, _lblNumberText.frame.size.height)];
         [_lblNumberText setFont:[UIFont fontWithName:Font size:Q(12)]];
         [_lblNumberText setText:@"Number"];
         [_lblNumberText setTextAlignment:NSTextAlignmentCenter];
         [_btnMenu addSubview:_lblNumberText];
-        _lblNumber = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, Q(60), Q(30))];
+        _lblNumber = [[UILabel alloc] initClearWithFrame:CGRectMake(0, 0, Q(60), Q(30))];
         [_lblNumber setCenter:CGPointMake(_lblNumberText.center.x + Q(65), _lblNumberText.frame.size.height)];
         [_lblNumber setFont:[UIFont fontWithName:Font size:Q(18)]];
         [_lblNumber setText:@"0"];
         [_lblNumber setTextAlignment:NSTextAlignmentCenter];
         [_btnMenu addSubview:_lblNumber];
+//        self.backgroundColor = [UIColor clearColor];
     }
     return self;
 }

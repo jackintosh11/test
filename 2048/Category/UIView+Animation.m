@@ -14,20 +14,12 @@
     [self.superview insertSubview:self belowSubview:view];
     [self moveToCenter:view.center];
 }
+
 - (void)moveToCenter:(CGPoint)center
 {
-//    CGRect displayFrame = [[self.layer presentationLayer] frame];
-//    self.frame = CGRectMake(displayFrame.origin.x - (self.frame.size.width - displayFrame.size.width)/2,
-//                            displayFrame.origin.y + (self.frame.size.height - displayFrame.size.height)/2,
-//                            self.frame.size.width,
-//                            self.frame.size.height);
-    
-//    float s = sqrtf(powf(center.x - self.center.x, 2) + powf(center.y - self.center.y, 2));
-//    float v = 400;
-
     [UIView beginAnimations:@"move" context:nil];
     [UIView setAnimationCurve:UIViewAnimationCurveLinear];
-    [UIView setAnimationDuration:.2];
+    [UIView setAnimationDuration:.15];
     [UIView setAnimationDelegate:self];
     [UIView setAnimationDidStopSelector:@selector(moveDidEnd)];
     self.center = center;
@@ -58,7 +50,6 @@
 {
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-//    [UIView setAnimationDelay:0.4];
     [UIView setAnimationDuration:0.2];
     [UIView setAnimationDelegate:self];
     self.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1);

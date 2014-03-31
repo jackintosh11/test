@@ -15,7 +15,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        _btnRestart = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        _btnRestart = [UIButton buttonWithType:UIButtonTypeCustom];
         [_btnRestart setTitle:@"Restart" forState:UIControlStateNormal];
         [_btnRestart addTarget:self action:@selector(btnRestartSelected) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_btnRestart];
@@ -27,7 +27,7 @@
         [_btnRestart setBackgroundColor:[UIColor colorWithRed:255.0/255.0 green:101.0/255.0 blue:107.0/255.0 alpha:1]];
         _btnRestart.layer.cornerRadius = Q(19);
         
-        _btnResume = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        _btnResume = [UIButton buttonWithType:UIButtonTypeCustom];
         [_btnResume setTitle:@"Resume" forState:UIControlStateNormal];
         [_btnResume addTarget:self action:@selector(btnResumeSelected) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_btnResume];
@@ -39,7 +39,7 @@
         [_btnResume setBackgroundColor:[UIColor colorWithRed:.2578 green:.6953 blue:.6758 alpha:1]];
         _btnResume.layer.cornerRadius = Q(19);
         
-        _btnExit = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        _btnExit = [UIButton buttonWithType:UIButtonTypeCustom];
         [_btnExit setTitle:@"Exit" forState:UIControlStateNormal];
         [_btnExit addTarget:self action:@selector(btnExitSelected) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_btnExit];

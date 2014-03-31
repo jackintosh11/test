@@ -17,11 +17,11 @@
     if (self) {
         self.layer.cornerRadius = Q(5);
         self.backgroundColor = [UIColor whiteColor];
-        _label = [[UILabel alloc] initWithFrame:CGRectMake(0,
+        _label = [[UILabel alloc] initClearWithFrame:CGRectMake(0,
                                                           0,
                                                           frame.size.width,
                                                           frame.size.height)];
-        _label.font = [UIFont fontWithName:@"GillSans-Bold" size:Q(30)];
+        _label.font = [UIFont fontWithName:@"GillSans-Bold" size:Q(35)];
         _label.textAlignment = NSTextAlignmentCenter;
         [_label setAdjustsFontSizeToFitWidth:YES];
         [self addSubview:_label];
