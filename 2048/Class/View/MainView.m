@@ -27,7 +27,7 @@
         [self addSubview:_logoView];
         [self initLogo];
         
-        _btnStart = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        _btnStart = [UIButton buttonWithType:UIButtonTypeCustom];
         [_btnStart setTitle:@"Play Now" forState:UIControlStateNormal];
         [_btnStart addTarget:self action:@selector(btnStartSelected) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_btnStart];
@@ -39,7 +39,7 @@
         [_btnStart setBackgroundColor:[UIColor colorWithRed:.2578 green:.6953 blue:.6758 alpha:1]];
         _btnStart.layer.cornerRadius = Q(19);
         
-        _btnSetting = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        _btnSetting = [UIButton buttonWithType:UIButtonTypeCustom];
         [_btnSetting setTitle:@"Menu" forState:UIControlStateNormal];
         [_btnSetting addTarget:self action:@selector(btnSettingSelected) forControlEvents:UIControlEventTouchUpInside];
 //        [self addSubview:_btnSetting];
@@ -49,7 +49,7 @@
         [_btnSetting setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_btnSetting setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
         
-        _btnAbout = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        _btnAbout = [UIButton buttonWithType:UIButtonTypeCustom];
         [_btnAbout setTitle:@"About me" forState:UIControlStateNormal];
 //        [_btnAbout addTarget:self action:@selector(btnSettingSelected) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_btnAbout];
@@ -59,7 +59,7 @@
         [_btnAbout setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
         
         
-        _btnHelp = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        _btnHelp = [UIButton buttonWithType:UIButtonTypeCustom];
         [_btnHelp setTitle:@"How to" forState:UIControlStateNormal];
 //        [_btnHelp addTarget:self action:@selector(btnSettingSelected) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_btnHelp];
@@ -71,7 +71,7 @@
         
         _isMenuShow = NO;
         
-        _lblBestScore = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, Q(200), Q(32))];
+        _lblBestScore = [[UILabel alloc] initClearWithFrame:CGRectMake(0, 0, Q(200), Q(32))];
         [_lblBestScore setFont:[UIFont fontWithName:Font size:Q(14)]];
         [_lblBestScore setText:@"Your best: 1024"];
         [_lblBestScore setTextAlignment:NSTextAlignmentCenter];
@@ -79,21 +79,21 @@
         
         [self calculateLayersCenter];
         
-//        _lblMaxCount = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, Q(200), Q(32))];
+//        _lblMaxCount = [[UILabel alloc] initClearWithFrame(0, 0, Q(200), Q(32))];
 //        [_lblMaxCount setCenter:CGPointMake(frame.size.width/2.0, _lblBestScore.center.y - Q(32))];
 //        [_lblMaxCount setFont:[UIFont fontWithName:Font size:14]];
 //        [_lblMaxCount setText:@"Max count: 1024"];
 //        [_lblMaxCount setTextAlignment:NSTextAlignmentCenter];
 //        [self addSubview:_lblMaxCount];
         
-//        UIButton *btnAdd = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+//        UIButton *btnAdd = [UIButton UIButtonTypeCustom];
 //        [btnAdd setTitle:@"+" forState:UIControlStateNormal];
 //        [btnAdd addTarget:self action:@selector(btnAddSelected) forControlEvents:UIControlEventTouchUpInside];
 //        btnAdd.frame = CGRectMake(0, 0, 60, 60);
 //        btnAdd.center = CGPointMake(btnStart.center.x + Q(50), btnStart.center.y - Q(200));
 //        [self addSubview:btnAdd];
 //        
-//        UIButton *btnCut = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+//        UIButton *btnCut = [UIButton UIButtonTypeCustom];
 //        [btnCut addTarget:self action:@selector(btnCutSelected) forControlEvents:UIControlEventTouchUpInside];
 //        btnCut.frame = CGRectMake(0, 0, 60, 60);
 //        btnCut.center = CGPointMake(btnStart.center.x - Q(50), btnStart.center.y - Q(200));
@@ -101,7 +101,7 @@
 //        [self addSubview:btnCut];
         
       
-//        _lblLevel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 60, 60)];
+//        _lblLevel = [[UILabel alloc] initClearWithFrame(0, 0, 60, 60)];
 //        _lblLevel.center = CGPointMake(_btnStart.center.x, _btnStart.center.y - Q(200));
 //        _lblLevel.textAlignment = NSTextAlignmentCenter;
 //        [self addSubview:_lblLevel];

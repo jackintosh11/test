@@ -87,7 +87,7 @@
         
         // Use predefined GADAdSize constants to define the GADBannerView.
         GADBannerView *adBanner = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner origin:origin];
-        
+        adBanner.frame = CGRectMake(adBanner.frame.origin.x, adBanner.frame.origin.y, [UIScreen mainScreen].bounds.size.width, adBanner.frame.size.height);
         // Note: Edit SampleConstants.h to provide a definition for kSampleAdUnitID before compiling.
         adBanner.adUnitID = @"a1532dc423dcc46";
         adBanner.delegate = self;
