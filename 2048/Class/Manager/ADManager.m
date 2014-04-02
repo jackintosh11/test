@@ -8,7 +8,7 @@
 
 #import "ADManager.h"
 #define admob_id @"a1532dc423dcc46"
-
+#define loop_interval 75
 @implementation ADManager
 static ADManager *_sharedManager;
 + (ADManager *)shared
@@ -38,16 +38,16 @@ static ADManager *_sharedManager;
     self.currentType = type;
     if (type == ADTypeApple)
     {
-        _aadBanner.alpha = 1;
         _gadBanner.alpha = 0;
+        _aadBanner.alpha = 1;
+//        [self.rootViewController.view insertSubview:_aadBanner aboveSubview:_gadBanner];
     }
     else
     {
-        _aadBanner.alpha = 0;
         _gadBanner.alpha = 1;
+        _aadBanner.alpha = 0;
+//        [self.rootViewController.view insertSubview:_gadBanner aboveSubview:_aadBanner];
     }
-    [self.rootViewController.view addSubview:_aadBanner];
-    [self.rootViewController.view addSubview:_gadBanner];
 }
 
 - (void)initWithViewController:(UIViewController *)controller
@@ -62,20 +62,19 @@ static ADManager *_sharedManager;
     _aadBanner.delegate = self;
     [controller.view addSubview:_aadBanner];
     
-    GADBannerView *adBanner = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner origin:CGPointZero];
-    adBanner.frame = CGRectMake(0,
+    _gadBanner = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner origin:CGPointZero];
+    _gadBanner.frame = CGRectMake(0,
                                 winSize.height - CGSizeFromGADAdSize(kGADAdSizeBanner).height,
                                 winSize.width,
                                 CGSizeFromGADAdSize(kGADAdSizeBanner).height);
-    adBanner.adUnitID = admob_id;
-    adBanner.delegate = self;
-    adBanner.rootViewController = controller;
-    [controller.view addSubview:adBanner];
-    [adBanner loadRequest:[self gRequest]];
+    _gadBanner.adUnitID = admob_id;
+    _gadBanner.delegate = self;
+    _gadBanner.rootViewController = controller;
+    [controller.view addSubview:_gadBanner];
+    [_gadBanner loadRequest:[self gRequest]];
     
-    [controller.view addSubview:_aadBanner];
     [_loopTimer invalidate];
-    _loopTimer = [NSTimer scheduledTimerWithTimeInterval:120 target:self selector:@selector(loop) userInfo:nil repeats:YES];
+    _loopTimer = [NSTimer scheduledTimerWithTimeInterval:loop_interval target:self selector:@selector(loop) userInfo:nil repeats:YES];
 }
 
 #pragma mark - Google
