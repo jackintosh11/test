@@ -40,14 +40,16 @@ static ADManager *_sharedManager;
     {
         _gadBanner.alpha = 0;
         _aadBanner.alpha = 1;
-//        [self.rootViewController.view insertSubview:_aadBanner aboveSubview:_gadBanner];
+//        ;
     }
     else
     {
         _gadBanner.alpha = 1;
         _aadBanner.alpha = 0;
-//        [self.rootViewController.view insertSubview:_gadBanner aboveSubview:_aadBanner];
+//        ;
     }
+    [self.rootViewController.view  addSubview:_gadBanner];
+    [self.rootViewController.view  addSubview:_aadBanner];
 }
 
 - (void)initWithViewController:(UIViewController *)controller
