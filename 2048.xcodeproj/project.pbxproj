@@ -24,6 +24,8 @@
 		188C986618DE03AC0006DF86 /* button_click.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 188C986518DE03AC0006DF86 /* button_click.mp3 */; };
 		188C986A18DE04070006DF86 /* AudioHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 188C986918DE04070006DF86 /* AudioHelper.m */; };
 		188C987818DE0EF60006DF86 /* woosh.aif in Resources */ = {isa = PBXBuildFile; fileRef = 188C987718DE0EF60006DF86 /* woosh.aif */; };
+		18A1886818EBE12700692CF5 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A1886718EBE12700692CF5 /* iAd.framework */; };
+		18A1886C18EBE6D000692CF5 /* ADManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A1886B18EBE6D000692CF5 /* ADManager.m */; };
 		18C208D018DB339000C548E3 /* UMSocialLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 18C208B118DB339000C548E3 /* UMSocialLocalizable.strings */; };
 		18C208D118DB339000C548E3 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18C208B518DB339000C548E3 /* libWeChatSDK.a */; };
 		18C208D218DB339000C548E3 /* libUMSocial_Sdk_3.3.4.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18C208C418DB339000C548E3 /* libUMSocial_Sdk_3.3.4.a */; };
@@ -98,6 +100,9 @@
 		188C986818DE04070006DF86 /* AudioHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioHelper.h; sourceTree = "<group>"; };
 		188C986918DE04070006DF86 /* AudioHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioHelper.m; sourceTree = "<group>"; };
 		188C987718DE0EF60006DF86 /* woosh.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = woosh.aif; sourceTree = "<group>"; };
+		18A1886718EBE12700692CF5 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		18A1886A18EBE6D000692CF5 /* ADManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADManager.h; sourceTree = "<group>"; };
+		18A1886B18EBE6D000692CF5 /* ADManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADManager.m; sourceTree = "<group>"; };
 		18C208B218DB339000C548E3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/UMSocialLocalizable.strings; sourceTree = "<group>"; };
 		18C208B518DB339000C548E3 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		18C208B618DB339000C548E3 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
@@ -163,6 +168,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18A1886818EBE12700692CF5 /* iAd.framework in Frameworks */,
 				188C967618DDF4800006DF86 /* AudioToolbox.framework in Frameworks */,
 				188C986418DDFC130006DF86 /* CoreTelephony.framework in Frameworks */,
 				188C986218DDFC010006DF86 /* AVFoundation.framework in Frameworks */,
@@ -231,6 +237,15 @@
 				188C986918DE04070006DF86 /* AudioHelper.m */,
 			);
 			path = Audio;
+			sourceTree = "<group>";
+		};
+		18A1886918EBE6C400692CF5 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				18A1886A18EBE6D000692CF5 /* ADManager.h */,
+				18A1886B18EBE6D000692CF5 /* ADManager.m */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 		18C208B018DB339000C548E3 /* UMSocial_Sdk_3.3.4 */ = {
@@ -318,6 +333,7 @@
 		18E11FC918D8F3C400CC8C42 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				18A1886718EBE12700692CF5 /* iAd.framework */,
 				188C986318DDFC130006DF86 /* CoreTelephony.framework */,
 				188C986118DDFC010006DF86 /* AVFoundation.framework */,
 				188C985B18DDF8310006DF86 /* StoreKit.framework */,
@@ -367,6 +383,7 @@
 		18E11FF918D8F40E00CC8C42 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				18A1886918EBE6C400692CF5 /* Manager */,
 				188C986718DE03F60006DF86 /* Audio */,
 				18E11FFB18D8F40E00CC8C42 /* View */,
 			);
@@ -532,6 +549,7 @@
 				9677F2C718DDD1DA004625AE /* PopupMenu.m in Sources */,
 				188C986A18DE04070006DF86 /* AudioHelper.m in Sources */,
 				18E1200F18D909E200CC8C42 /* UIView+Animation.m in Sources */,
+				18A1886C18EBE6D000692CF5 /* ADManager.m in Sources */,
 				18E1200518D8F4B900CC8C42 /* GameView.m in Sources */,
 				1855A8C718E9593600864848 /* UILabel+Init.m in Sources */,
 				18F3C6FF18DB1B58006BCEF6 /* UIView+Controller.m in Sources */,
