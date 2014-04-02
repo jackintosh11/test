@@ -94,8 +94,8 @@
     _btnDone.center = CGPointMake(_btnDone.center.x, self.frame.size.height+_btnDone.frame.size.height/2.0);
     _btnShare.center = CGPointMake(_btnShare.center.x, self.frame.size.height+_btnShare.frame.size.height/2.0);
     
-    [_content moveToCenter:CGPointMake(self.frame.size.width/2.0, self.frame.size.height*2.0/5.0) withRebound:CGPointMake(0, 8) delay:0];
-    [_btnDone moveToCenter:CGPointMake(self.frame.size.width/2 ,self.frame.size.height-_btnDone.frame.size.height/2.0 - Q(25)) withRebound:CGPointMake(0, -8) delay:.05];
+    [_content moveToCenter:CGPointMake(self.frame.size.width/2.0, self.frame.size.height*2.0/5.0 - Q(15)) withRebound:CGPointMake(0, 8) delay:0];
+    [_btnDone moveToCenter:CGPointMake(self.frame.size.width/2 ,self.frame.size.height-_btnDone.frame.size.height/2.0 - Q(65)) withRebound:CGPointMake(0, -8) delay:.05];
     [_btnShare moveToCenter:CGPointMake(self.frame.size.width/2 ,_btnDone.center.y - Q(48)) withRebound:CGPointMake(0, -8) delay:.1 completion:^(BOOL finished) {
         
     }];

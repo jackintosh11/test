@@ -72,10 +72,12 @@
             }
             
             this.view = count;
+            [[ADManager shared] loop];
             [count enter];
         };
         _countView.exitBlock = ^() {
             this.view = main;
+            [[ADManager shared] loop];
             [main enter];
         };
         _countView.shareSnap = ^UIImage* () {
