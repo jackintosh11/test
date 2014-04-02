@@ -7,9 +7,10 @@
 //
 
 #import "MainViewController.h"
-//#import "UMUFPBannerView.h"
 #import "GADBannerView.h"
 #import "GADRequest.h"
+#import <iAd/iAd.h>
+#import "ADManager.h"
 @interface MainViewController ()
 
 @end
@@ -33,6 +34,7 @@
             game.currentGameSize = level;
             this.view = game;
             [game Start];
+            [[ADManager shared] loop];
         };
         _gameView.gameOver = ^(int score, int max) {
             NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -81,19 +83,11 @@
         };
         self.view = _mainView;
 
-        CGPoint origin = CGPointMake(0.0,
-                                     self.view.frame.size.height -
-                                     CGSizeFromGADAdSize(kGADAdSizeBanner).height);
+        [[ADManager shared] initWithViewController:self];
         
+
         // Use predefined GADAdSize constants to define the GADBannerView.
-        GADBannerView *adBanner = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner origin:origin];
-        adBanner.frame = CGRectMake(adBanner.frame.origin.x, adBanner.frame.origin.y, [UIScreen mainScreen].bounds.size.width, adBanner.frame.size.height);
-        // Note: Edit SampleConstants.h to provide a definition for kSampleAdUnitID before compiling.
-        adBanner.adUnitID = @"a1532dc423dcc46";
-        adBanner.delegate = self;
-        adBanner.rootViewController = self;
-        [_gameView addSubview:adBanner];
-        [adBanner loadRequest:[self request]];
+        
 
         [_mainView enter];
     }
@@ -107,13 +101,7 @@
 - (void)adView:(GADBannerView *)view didFailToReceiveAdWithError:(GADRequestError *)error {
     //NSLog(@"Failed to receive ad with error: %@", [error localizedFailureReason]);
 }
-- (GADRequest *)request {
-    GADRequest *request = [GADRequest request];
-    request.testDevices = @[
-                            GAD_SIMULATOR_ID
-                            ];
-    return request;
-}
+
 - (void)dealloc
 {
     
